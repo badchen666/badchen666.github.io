@@ -380,7 +380,7 @@
         <div class="brand">
             <div class="title center-align">
                 
-                    subtitle
+                山川异域，风月同天
                 
             </div>
 
@@ -392,9 +392,9 @@
                     var typed = new Typed("#subtitle", {
                         strings: [ 
                             
-                                "从来没有真正的绝境, 只有心灵的迷途",
+                                "我思，故我在",
                             
-                                "Never really desperate, only the lost of the soul",
+                                "I think,therefore I am",
                             
                         ],
                         startDelay: 300,
@@ -912,6 +912,14 @@ $(function () {
     
 
     <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 鼠标星星特效 -->
