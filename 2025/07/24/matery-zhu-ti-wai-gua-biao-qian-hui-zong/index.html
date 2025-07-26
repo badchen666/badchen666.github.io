@@ -59,7 +59,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -706,19 +706,19 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>通过在Markdown文件中引入外挂标签，可以极大地提升Blog的可读性，可惜Butterfly的插件直接放到Matery里会有一部分用不了，看着那些好看的效果用不了着实令人难受，在网上找了一圈，基本上都是零碎的资源，所以考虑将它们适当整合，再加上一些自己的经验，尽可能丰富Matery主题的外挂标签，也顺便在这途中积累一下前端开发的相关知识。</p>
-<h1>1、彩色文字</h1>
-<p>在一段话中方便插入各种颜色的标签，包括：</p>
+<h1 id="1、彩色文字"><a href="#1、彩色文字" class="headerlink" title="1、彩色文字"></a>1、彩色文字</h1><p>在一段话中方便插入各种颜色的标签，包括：</p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% span red, 红色 %}、{% span yellow, 黄色 %}、{% span green, 绿色 %}、{% span cyan, 青色 %}、{% span blue, 蓝色 %}、{% span gray, 灰色 %}。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <span class="p red">红色</span>、<span class="p yellow">黄色</span>、<span class="p green">绿色</span>、<span class="p cyan">青色</span>、<span class="p blue">蓝色</span>、<span class="p gray">灰色</span>。
-<h1>2、超大号文字</h1>
-<p>文档「开始」页面中的标题部分就是超大号文字。</p>
+
+
+# 2、超大号文字
+文档「开始」页面中的标题部分就是超大号文字。
+
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% span center logo large, Volantis %}
 {% span center small, A Wonderful Theme for Hexo %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <span class="p center logo large">Volantis</span>
 <span class="p center small">A Wonderful Theme for Hexo</span>
-<h1>3、tip型标签</h1>
-<h2 id="3-1-静态标签">3.1  静态标签</h2>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip %}default{% endtip %}
+<h1 id="3、tip型标签"><a href="#3、tip型标签" class="headerlink" title="3、tip型标签"></a>3、tip型标签</h1><h2 id="3-1-静态标签"><a href="#3-1-静态标签" class="headerlink" title="3.1  静态标签"></a>3.1  静态标签</h2><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip %}default{% endtip %}
 {% tip info %}info{% endtip %}
 {% tip success %}success{% endtip %}
 {% tip error %}error{% endtip %}
@@ -757,38 +757,32 @@
 </div>
 <div class="tip fa-atom"><p>自定义font awesome图标</p>
 </div>
-<h2 id="3-2-动态标签">3.2  动态标签</h2>
-<h3 id="3-2-1-On-DOM-load（当页面加载时显示动画）">3.2.1  On DOM load（当页面加载时显示动画）</h3>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-horizontal animated %}warning{% endtip %}
+<h2 id="3-2-动态标签"><a href="#3-2-动态标签" class="headerlink" title="3.2  动态标签"></a>3.2  动态标签</h2><h3 id="3-2-1-On-DOM-load（当页面加载时显示动画）"><a href="#3-2-1-On-DOM-load（当页面加载时显示动画）" class="headerlink" title="3.2.1  On DOM load（当页面加载时显示动画）"></a>3.2.1  On DOM load（当页面加载时显示动画）</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-horizontal animated %}warning{% endtip %}
 {% tip ban faa-flash animated %}ban{% endtip %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <div class="tip warning faa-horizontal animated"><p>warning</p>
 </div>
 <div class="tip ban faa-flash animated"><p>ban</p>
 </div>
-<h3 id="3-2-2-调整动画速度">3.2.2  调整动画速度</h3>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-horizontal animated faa-fast %}warning{% endtip %}
+<h3 id="3-2-2-调整动画速度"><a href="#3-2-2-调整动画速度" class="headerlink" title="3.2.2  调整动画速度"></a>3.2.2  调整动画速度</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-horizontal animated faa-fast %}warning{% endtip %}
 {% tip ban faa-flash animated faa-slow %}ban{% endtip %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <div class="tip warning faa-horizontal animated faa-fast"><p>warning</p>
 </div>
 <div class="tip ban faa-flash animated faa-slow"><p>ban</p>
 </div>
-<h3 id="3-2-3-On-hover（当鼠标悬停时显示动画）">3.2.3  On hover（当鼠标悬停时显示动画）</h3>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-horizontal animated-hover %}warning{% endtip %}
+<h3 id="3-2-3-On-hover（当鼠标悬停时显示动画）"><a href="#3-2-3-On-hover（当鼠标悬停时显示动画）" class="headerlink" title="3.2.3  On hover（当鼠标悬停时显示动画）"></a>3.2.3  On hover（当鼠标悬停时显示动画）</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-horizontal animated-hover %}warning{% endtip %}
 {% tip ban faa-flash animated-hover %}ban{% endtip %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <div class="tip warning faa-horizontal animated-hover"><p>warning</p>
 </div>
 <div class="tip ban faa-flash animated-hover"><p>ban</p>
 </div>
-<h3 id="3-2-4-On-parent-hover（当鼠标悬停在父级元素时显示动画）">3.2.4  On parent hover（当鼠标悬停在父级元素时显示动画）</h3>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-parent animated-hover %}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>faa-horizontal<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>warning<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>{% endtip %}
+<h3 id="3-2-4-On-parent-hover（当鼠标悬停在父级元素时显示动画）"><a href="#3-2-4-On-parent-hover（当鼠标悬停在父级元素时显示动画）" class="headerlink" title="3.2.4  On parent hover（当鼠标悬停在父级元素时显示动画）"></a>3.2.4  On parent hover（当鼠标悬停在父级元素时显示动画）</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% tip warning faa-parent animated-hover %}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>faa-horizontal<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>warning<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>{% endtip %}
 {% tip ban faa-parent animated-hover %}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>faa-flash<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>ban<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>{% endtip %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <div class="tip warning faa-parent animated-hover"><p class="faa-horizontal">warning</p></div>
 <div class="tip ban faa-parent animated-hover"><p class="faa-flash">ban</p></div>
 <ul>
 <li>关于这部分外挂标签的写法，主要是参照了 <a target="_blank" rel="noopener" href="https://akilar.top/posts/615e2dec/">https://akilar.top/posts/615e2dec/</a> 这篇博客</li>
 </ul>
-<h1>4、checkbox型标签</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% checkbox 纯文本测试 %}
+<h1 id="4、checkbox型标签"><a href="#4、checkbox型标签" class="headerlink" title="4、checkbox型标签"></a>4、checkbox型标签</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% checkbox 纯文本测试 %}
 {% checkbox checked, 支持简单的 <span class="token url">[<span class="token content">markdown</span>](<span class="token url">https://guides.github.com/features/mastering-markdown/</span>)</span> 语法 %}
 {% checkbox red, 支持自定义颜色 %}
 {% checkbox green checked, 绿色 + 默认选中 %}
@@ -828,8 +822,7 @@
 <div class="checkbox times red checked"><input type="checkbox" checked="checked">
             <p>叉</p>
             </div>
-<h1>5、radio型标签</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% radio 纯文本测试 %}
+<h1 id="5、radio型标签"><a href="#5、radio型标签" class="headerlink" title="5、radio型标签"></a>5、radio型标签</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% radio 纯文本测试 %}
 {% radio checked, 支持简单的 <span class="token url">[<span class="token content">markdown</span>](<span class="token url">https://guides.github.com/features/mastering-markdown/</span>)</span> 语法 %}
 {% radio red, 支持自定义颜色 %}
 {% radio green, 绿色 %}
@@ -857,8 +850,7 @@
 <div class="checkbox blue"><input type="radio">
             <p>蓝色</p>
             </div>
-<h1>6、folding型标签</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% folding 查看图片测试 %}
+<h1 id="6、folding型标签"><a href="#6、folding型标签" class="headerlink" title="6、folding型标签"></a>6、folding型标签</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% folding 查看图片测试 %}
 
 ![](https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg)
 
@@ -919,8 +911,7 @@ hahaha <span class="token tag"><span class="token tag"><span class="token punctu
               <details class="folding-tag" blue=""><summary> 查看嵌套测试2 </summary>              <div class="content">              <details class="folding-tag"><summary> 查看嵌套测试3 </summary>              <div class="content">              <p>hahaha <span><img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/tieba/%E6%BB%91%E7%A8%BD.png" style="height:24px"></span></p>              </div>            </details>              </div>            </details>
               </div>
             </details>
-<h1>7、poem型标签</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% poem 水调歌头,苏轼 %}
+<h1 id="7、poem型标签"><a href="#7、poem型标签" class="headerlink" title="7、poem型标签"></a>7、poem型标签</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% poem 水调歌头,苏轼 %}
 丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。
 明月几时有？把酒问青天。
 不知天上宫阙，今夕是何年？
@@ -932,19 +923,10 @@ hahaha <span class="token tag"><span class="token tag"><span class="token punctu
 人有悲欢离合，月有阴晴圆缺，此事古难全。
 但愿人长久，千里共婵娟。
 {% endpoem %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<div class="poem"><div class="poem-title">水调歌头</div><div class="poem-author">苏轼</div><p>丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。<br>
-明月几时有？把酒问青天。<br>
-不知天上宫阙，今夕是何年？<br>
-我欲乘风归去，又恐琼楼玉宇，高处不胜寒。<br>
-起舞弄清影，何似在人间？</p>
-<p>转朱阁，低绮户，照无眠。<br>
-不应有恨，何事长向别时圆？<br>
-人有悲欢离合，月有阴晴圆缺，此事古难全。<br>
-但愿人长久，千里共婵娟。</p>
+<div class="poem"><div class="poem-title">水调歌头</div><div class="poem-author">苏轼</div><p>丙辰中秋，欢饮达旦，大醉，作此篇，兼怀子由。<br>明月几时有？把酒问青天。<br>不知天上宫阙，今夕是何年？<br>我欲乘风归去，又恐琼楼玉宇，高处不胜寒。<br>起舞弄清影，何似在人间？</p>
+<p>转朱阁，低绮户，照无眠。<br>不应有恨，何事长向别时圆？<br>人有悲欢离合，月有阴晴圆缺，此事古难全。<br>但愿人长久，千里共婵娟。</p>
 </div>
-<h1>8、button型标签</h1>
-<h2 id="8-1-btn型标签">8.1 btn型标签</h2>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">This is my website, click the button {% btn 'https://blog.aqcoder.cn/',aqcoder %}
+<h1 id="8、button型标签"><a href="#8、button型标签" class="headerlink" title="8、button型标签"></a>8、button型标签</h1><h2 id="8-1-btn型标签"><a href="#8-1-btn型标签" class="headerlink" title="8.1 btn型标签"></a>8.1 btn型标签</h2><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">This is my website, click the button {% btn 'https://blog.aqcoder.cn/',aqcoder %}
 
 不设置任何参数的 {% btn 按钮, / %} 适合融入段落中。 
 
@@ -952,11 +934,10 @@ regular 按钮适合独立于段落之外： {% btn regular, 示例博客, /, fa
 
 large 按钮更具有强调作用，建议搭配 center 使用： {% btn center large, 开始使用Matery, https://github.com/blinkfox/hexo-theme-matery, fas fa-download %} <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>This is my website, click the button <a class="theme-btn" target="_blank" rel="noopener" href="https://blog.aqcoder.cn/">aqcoder</a></p>
-<p>不设置任何参数的 <a class="theme-btn" href="按钮">/</a> 适合融入段落中。</p>
-<p>regular 按钮适合独立于段落之外： <a class="theme-btn" href="regular" title="fas fa-play-circle"><i class="fa fa-/"></i>示例博客</a></p>
-<p>large 按钮更具有强调作用，建议搭配 center 使用： <a class="theme-btn" href="center large" title="fas fa-download"><i class="fa fa-https://github.com/blinkfox/hexo-theme-matery"></i>开始使用Matery</a></p>
-<h2 id="8-2-btns型标签（还没调好）">8.2  btns型标签（还没调好）</h2>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% btns circle grid5 %}
+<p>不设置任何参数的 <a class="theme-btn" href="按钮">/</a> 适合融入段落中。 </p>
+<p>regular 按钮适合独立于段落之外： <a class="theme-btn" href="regular" title="fas fa-play-circle"><i class="fa fa-/"></i>示例博客</a> </p>
+<p>large 按钮更具有强调作用，建议搭配 center 使用： <a class="theme-btn" href="center large" title="fas fa-download"><i class="fa fa-https://github.com/blinkfox/hexo-theme-matery"></i>开始使用Matery</a> </p>
+<h2 id="8-2-btns型标签（还没调好）"><a href="#8-2-btns型标签（还没调好）" class="headerlink" title="8.2  btns型标签（还没调好）"></a>8.2  btns型标签（还没调好）</h2><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% btns circle grid5 %}
 {% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %}
 {% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %}
 {% cell xaoxuu, https://xaoxuu.com, https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png %}
@@ -969,23 +950,18 @@ large 按钮更具有强调作用，建议搭配 center 使用： {% btn center 
 {% cell 查看文档, /, fas fa-book-open %}
 {% endbtns %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li>
-<p>如果不出意外，前面的部分理论上来说装上butterfly的外挂标签插件都可以正常显示</p>
+<li><p>如果不出意外，前面的部分理论上来说装上butterfly的外挂标签插件都可以正常显示</p>
 </li>
-<li>
-<p><strong>需要特别注意，打完插件后需要在_config.matery.xml中额外引入，否则会报错</strong></p>
+<li><p><strong>需要特别注意，打完插件后需要在_config.matery.xml中额外引入，否则会报错</strong></p>
 <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">pjax:
   enable: true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>如果出了意外，可以移步<a target="_blank" rel="noopener" href="https://blog.bluesky01st.eu.org/posts/934c955c.html#toc-heading-1">(๑•̀ㅂ•́) ✧被发现了～ (bluesky01st.eu.org)</a>进行更详细的配置</p>
+<li><p>如果出了意外，可以移步<a target="_blank" rel="noopener" href="https://blog.bluesky01st.eu.org/posts/934c955c.html#toc-heading-1">(๑•̀ㅂ•́) ✧被发现了～ (bluesky01st.eu.org)</a>进行更详细的配置</p>
 </li>
-<li>
-<p>此外，matery主题内置有button标签，可以根据自己需要进行魔改（css+js）</p>
+<li><p>此外，matery主题内置有button标签，可以根据自己需要进行魔改（css+js）</p>
 </li>
 </ul>
-<h1>9、timeline型标签</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% timeline %} 
+<h1 id="9、timeline型标签"><a href="#9、timeline型标签" class="headerlink" title="9、timeline型标签"></a>9、timeline型标签</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% timeline %} 
 
 {% timenode 2020-11-27 <span class="token url">[<span class="token content">1.3.2 -&gt; 2.0.0</span>](<span class="token url">https://github.com/blinkfox/hexo-theme-matery/releases/tag/v2.0.0</span>)</span> %} 
 
@@ -1021,18 +997,17 @@ large 按钮更具有强调作用，建议搭配 center 使用： {% btn center 
 <div class="timeline"> 
 
 <div class="timenode"><div class="meta"><p></p><p>2020-11-27 <a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/releases/tag/v2.0.0">1.3.2 -&gt; 2.0.0</a></p>
-<p></p></div><div class="body"><ul><li>新增了对 Hexo 5.0.0 的支持，并推荐升级使用 Hexo 5.0.0，去除了对 hexo-prism-plugin 插件的依赖，可直接使用自带的 prismjs 插件；</li><li>新增了背景图功能；</li><li>新增了畅言、腾讯兔小巢、哔哔、 Artitalk 等评论或说说功能；</li><li>开始阅读部分行为修改； + 修改了 TOC 目录高度为自适应；</li><li>修复了搜索的相关问题； + 其他小问题修改；</li></ul><hr><ul><li>Added support for Hexo 5.0.0, and it is recommended to upgrade to Hexo 5.0.0, remove the dependency on the hexo-prism-plugin, you can directly use the built-in prismjs;</li><li>Added background image;</li><li>Added comment or talk support such as 畅言、腾讯兔小巢、哔哔、 Artitalk; + Modifications to “Start Reading”;</li><li>Modified TOC directory height to be adaptive; + Fixed search related bugs；</li><li>Fixed Other minor bugs；</li></ul></div></div> 
+<p></p></div><div class="body"><ul><li>新增了对 Hexo 5.0.0 的支持，并推荐升级使用 Hexo 5.0.0，去除了对 hexo-prism-plugin 插件的依赖，可直接使用自带的 prismjs 插件； </li><li>新增了背景图功能； </li><li>新增了畅言、腾讯兔小巢、哔哔、 Artitalk 等评论或说说功能； </li><li>开始阅读部分行为修改； + 修改了 TOC 目录高度为自适应； </li><li>修复了搜索的相关问题； + 其他小问题修改； </li></ul><hr><ul><li>Added support for Hexo 5.0.0, and it is recommended to upgrade to Hexo 5.0.0, remove the dependency on the hexo-prism-plugin, you can directly use the built-in prismjs; </li><li>Added background image; </li><li>Added comment or talk support such as 畅言、腾讯兔小巢、哔哔、 Artitalk; + Modifications to “Start Reading”; </li><li>Modified TOC directory height to be adaptive; + Fixed search related bugs； </li><li>Fixed Other minor bugs； </li></ul></div></div> 
 
 <div class="timenode"><div class="meta"><p></p><p>2020-08-30 <a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/releases/tag/v1.3.2">1.3.1 -&gt; 1.3.2</a></p>
-<p></p></div><div class="body"><ul><li>新增了繁体字的支持；</li><li>新增了 404 页面；</li><li>其他小问题修改；</li></ul><hr><ul><li>Added support for traditional characters;</li><li>Added 404 page;</li><li>Fixed other minor issues；</li></ul></div></div> 
+<p></p></div><div class="body"><ul><li>新增了繁体字的支持； </li><li>新增了 404 页面； </li><li>其他小问题修改； </li></ul><hr><ul><li>Added support for traditional characters; </li><li>Added 404 page; </li><li>Fixed other minor issues； </li></ul></div></div> 
 </div>
 <ul>
 <li>这个需要完全参考<a target="_blank" rel="noopener" href="https://blog.bluesky01st.eu.org/posts/934c955c.html#toc-heading-1">(๑•̀ㅂ•́) ✧被发现了～ (bluesky01st.eu.org)</a>的配置才能正常显示</li>
 <li>将对应的css文件复制进<code>/matery/source/css/my.css</code></li>
 <li>在<code>matery/source/js</code>文件夹中新建timeline.js，将相应配置复制进去就行</li>
 </ul>
-<h1>10、note型标签</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% note %}
+<h1 id="10、note型标签"><a href="#10、note型标签" class="headerlink" title="10、note型标签"></a>10、note型标签</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% note %}
 默认 note 提示标签
 {% endnote %}
 
@@ -1077,14 +1052,12 @@ danger note 提示标签
 <li>matery主题内置有note标签，直接用应该就行</li>
 <li>不过博主感觉样式不够美观就改了一下，具体的位置在<strong>theme/matery/source/css/matery.css</strong>的line 2190往后的部分，你可以在此基础上调整标签高度、图标大小、居中方式等元素。</li>
 </ul>
-<h1>11、link型标签</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% link 糖果屋教程贴, https://akilar.top/posts/615e2dec/, /img/siteicon/favicon.ico %}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="11、link型标签"><a href="#11、link型标签" class="headerlink" title="11、link型标签"></a>11、link型标签</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% link 糖果屋教程贴, https://akilar.top/posts/615e2dec/, /img/siteicon/favicon.ico %}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <div class="tag link"><a class="link-card" title="糖果屋教程贴" target="_blank" rel="noopener" href="https://akilar.top/posts/615e2dec/"><div class="left"><img src="/img/siteicon/favicon.ico"></div><div class="right"><p class="text">糖果屋教程贴</p><p class="url">https://akilar.top/posts/615e2dec/</p></div></a></div>
 <ul>
 <li><strong>直接打插件就能用</strong></li>
 </ul>
-<h1>12、引用型标签（还没调好）</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% referfrom '[1]','Akilarの糖果屋群聊简介','https://jq.qq.com/?_wv=1027&amp;k=pGLB2C0N' %}
+<h1 id="12、引用型标签（还没调好）"><a href="#12、引用型标签（还没调好）" class="headerlink" title="12、引用型标签（还没调好）"></a>12、引用型标签（还没调好）</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% referfrom '[1]','Akilarの糖果屋群聊简介','https://jq.qq.com/?_wv=1027&amp;k=pGLB2C0N' %}
 {% referfrom '[2]','Hexo中文文档','https://hexo.io/zh-cn/docs/' %}
 {% referfrom '[3]','Butterfly 安装文档(一) 快速开始','https://butterfly.js.org/posts/21cfbf15/' %}
 {% referfrom '[4]','hexo-theme-volantis 标签插件','https://volantis.js.org/v5/tag-plugins/' %}
@@ -1102,14 +1075,12 @@ danger note 提示标签
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[7]"></span><a class="reference-anchor" href="#referto_[7]">[7]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://lovelijunyi.gitee.io/posts/c898.html">小弋の生活馆全样式预览</a></div>
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[8]"></span><a class="reference-anchor" href="#referto_[8]">[8]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://github.com/l-lin/font-awesome-animation">l-lin-font-awesome-animation</a></div>
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[9]"></span><a class="reference-anchor" href="#referto_[9]">[9]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://www.antmoe.com/posts/3b43914f/">小康的butterfly主题使用文档</a></div>
-<h1>13、气泡注释</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">最近我学到了不少新玩意儿（虽然对很多大佬来说这些已经是旧技术了），比如CSS的{% bubble 兄弟相邻选择器,"例如 h1 + p {margin-top:50px;}" %}，{% bubble flex布局,"Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性","#ec5830" %}，{% bubble transform变换,"transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。","#1db675" %}，animation的{% bubble 贝塞尔速度曲线,"贝塞尔曲线(Bézier curve)，又称贝兹曲线或贝济埃曲线，是应用于二维图形应用程序的数学曲线。一般的矢量图形软件通过它来精确画出曲线，贝兹曲线由线段与节点组成，节点是可拖动的支点，线段像可伸缩的皮筋","#de4489" %}写法，还有今天刚看到的{% bubble clip-path,"clip-path属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。","#868fd7" %}属性。这些对我来说很新颖的概念狠狠的冲击着我以前积累起来的设计思路。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="13、气泡注释"><a href="#13、气泡注释" class="headerlink" title="13、气泡注释"></a>13、气泡注释</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">最近我学到了不少新玩意儿（虽然对很多大佬来说这些已经是旧技术了），比如CSS的{% bubble 兄弟相邻选择器,"例如 h1 + p {margin-top:50px;}" %}，{% bubble flex布局,"Flex 是 Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性","#ec5830" %}，{% bubble transform变换,"transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。","#1db675" %}，animation的{% bubble 贝塞尔速度曲线,"贝塞尔曲线(Bézier curve)，又称贝兹曲线或贝济埃曲线，是应用于二维图形应用程序的数学曲线。一般的矢量图形软件通过它来精确画出曲线，贝兹曲线由线段与节点组成，节点是可拖动的支点，线段像可伸缩的皮筋","#de4489" %}写法，还有今天刚看到的{% bubble clip-path,"clip-path属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。","#868fd7" %}属性。这些对我来说很新颖的概念狠狠的冲击着我以前积累起来的设计思路。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>最近我学到了不少新玩意儿（虽然对很多大佬来说这些已经是旧技术了），比如CSS的<span class="bubble-content">兄弟相邻选择器</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#71a4e3;">例如 h1 + p {margin-top:50px;}</span></span>，<span class="bubble-content">flex布局</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#ec5830;">Flex 是 Flexible Box 的缩写，意为弹性布局"，用来为盒状模型提供最大的灵活性"</span></span>，<span class="bubble-content">transform变换</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#1db675;">transform 属性向元素应用 2D 或 3D 转换。该属性允许我们对元素进行旋转、缩放、移动或倾斜。</span></span>，animation的<span class="bubble-content">贝塞尔速度曲线</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#de4489;">贝塞尔曲线(Bézier curve)，又称贝兹曲线或贝济埃曲线，是应用于二维图形应用程序的数学曲线。一般的矢量图形软件通过它来精确画出曲线，贝兹曲线由线段与节点组成，节点是可拖动的支点，线段像可伸缩的皮筋</span></span>写法，还有今天刚看到的<span class="bubble-content">clip-path</span><span class="bubble-notation"><span class="bubble-item" style="background-color:#868fd7;">clip-path属性使用裁剪方式创建元素的可显示区域。区域内的部分显示，区域外的隐藏。</span></span>属性。这些对我来说很新颖的概念狠狠的冲击着我以前积累起来的设计思路。</p>
 <ul>
 <li><strong>直接打插件就能用</strong></li>
 </ul>
-<h1>14、进度条标签（还没调好）</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% progress 10 red 进度条样式预览 %}
+<h1 id="14、进度条标签（还没调好）"><a href="#14、进度条标签（还没调好）" class="headerlink" title="14、进度条标签（还没调好）"></a>14、进度条标签（还没调好）</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% progress 10 red 进度条样式预览 %}
 {% progress 30 yellow 进度条样式预览 %}
 {% progress 50 green 进度条样式预览 %}
 {% progress 70 cyan 进度条样式预览 %}
@@ -1121,12 +1092,12 @@ danger note 提示标签
 <div class="progress"><div class="progress-bar-animated progress-bar progress-bar-striped bg-cyan" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"><p>进度条样式预览</p></div></div>
 <div class="progress"><div class="progress-bar-animated progress-bar progress-bar-striped bg-blue" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"><p>进度条样式预览</p></div></div>
 <div class="progress"><div class="progress-bar-animated progress-bar progress-bar-striped bg-gray" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><p>进度条样式预览</p></div></div>
-<h1>15、github卡片</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">| {% ghcard xaoxuu %} | {% ghcard xaoxuu, theme=vue %} |
+<h1 id="15、github卡片"><a href="#15、github卡片" class="headerlink" title="15、github卡片"></a>15、github卡片</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">| {% ghcard xaoxuu %} | {% ghcard xaoxuu, theme=vue %} |
 | -- | -- |
 | {% ghcard xaoxuu, theme=buefy %} | {% ghcard xaoxuu, theme=solarized-light %} |
 | {% ghcard xaoxuu, theme=onedark %} | {% ghcard xaoxuu, theme=solarized-dark %} |
 | {% ghcard xaoxuu, theme=algolia %} | {% ghcard xaoxuu, theme=calm %} |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1149,11 +1120,11 @@ danger note 提示标签
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
 <li><strong>直接打插件就能用</strong></li>
 </ul>
-<h1>16、github徽标</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% bdage Theme,Butterfly %}
+<h1 id="16、github徽标"><a href="#16、github徽标" class="headerlink" title="16、github徽标"></a>16、github徽标</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% bdage Theme,Butterfly %}
 {% bdage Frame,Hexo,hexo %}
 
 {% bdage CDN,JsDelivr,jsDelivr||abcdef,https://metroui.org.ua/index.html,本站使用JsDelivr为静态资源提供CDN加速 %}
@@ -1166,16 +1137,13 @@ danger note 提示标签
 <object class="ghbdage" style="margin-inline:5px" title="" standby="loading..." data="https://img.shields.io/badge/Butterfly-Theme-orange?logo=&amp;color=orange&amp;link=&amp;"></object>
 <object class="ghbdage" style="margin-inline:5px" title="" standby="loading..." data="https://img.shields.io/badge/Hexo-Frame-orange?logo=hexo&amp;color=orange&amp;link=&amp;"></object>
 <object class="ghbdage" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速" standby="loading..." data="https://img.shields.io/badge/JsDelivr-CDN-orange?logo=jsDelivr&amp;color=abcdef&amp;link=https://metroui.org.ua/index.html&amp;"></object>
-<p>//如果是跨顺序省略可选参数，仍然需要写个逗号,用作分割</p>
-<object class="ghbdage" style="margin-inline:5px" title="" standby="loading..." data="https://img.shields.io/badge/GitHub-Source-orange?logo=GitHub&amp;color=orange&amp;link=https://github.com/&amp;"></object>
+<p>//如果是跨顺序省略可选参数，仍然需要写个逗号,用作分割<br><object class="ghbdage" style="margin-inline:5px" title="" standby="loading..." data="https://img.shields.io/badge/GitHub-Source-orange?logo=GitHub&amp;color=orange&amp;link=https://github.com/&amp;"></object></p>
 <object class="ghbdage" style="margin-inline:5px" title="本站使用JsDelivr为静态资源提供CDN加速" standby="loading..." data="https://img.shields.io/badge/JsDelivr-CDN-orange?logo=jsDelivr&amp;color=abcdef&amp;link=https://metroui.org.ua/index.html&amp;"></object>
-<p>//如果是跨顺序省略可选参数，仍然需要写个逗号,用作分割</p>
-<object class="ghbdage" style="margin-inline:5px" title="" standby="loading..." data="https://img.shields.io/badge/GitHub-Source-orange?logo=GitHub&amp;color=orange&amp;link=https://github.com/&amp;"></object>
+<p>//如果是跨顺序省略可选参数，仍然需要写个逗号,用作分割<br><object class="ghbdage" style="margin-inline:5px" title="" standby="loading..." data="https://img.shields.io/badge/GitHub-Source-orange?logo=GitHub&amp;color=orange&amp;link=https://github.com/&amp;"></object></p>
 <ul>
 <li><strong>直接打插件就能用</strong></li>
 </ul>
-<h1>17、网站卡片</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% sitegroup %}
+<h1 id="17、网站卡片"><a href="#17、网站卡片" class="headerlink" title="17、网站卡片"></a>17、网站卡片</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% sitegroup %}
 {% site pandmonkey, url=https://pandmonkey.github.io/,
 screenshot=https://i.loli.net/2020/08/21/VuSwWZ1xAeUHEBC.jpg, 
 avatar=./medias/head/ssr.jpg, 
@@ -1200,8 +1168,7 @@ description=不多说，这是真的大佬 %}
 <ul>
 <li><strong>直接打插件就能用</strong></li>
 </ul>
-<h1>18、行内图片（还没调好）</h1>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">这是 {% inlineimage https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/aru-l/0000.gif %} 一段话。
+<h1 id="18、行内图片（还没调好）"><a href="#18、行内图片（还没调好）" class="headerlink" title="18、行内图片（还没调好）"></a>18、行内图片（还没调好）</h1><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">这是 {% inlineimage https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/aru-l/0000.gif %} 一段话。
 
 这又是 {% inlineimage https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/aru-l/5150.gif, height=40px %} 一段话。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>这是 <img no-lazy="" class="inline" src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/aru-l/0000.gif" style="height:1.5em"> 一段话。</p>
@@ -1209,33 +1176,28 @@ description=不多说，这是真的大佬 %}
 <ul>
 <li><strong>直接打插件，显示的还是跨行图片</strong></li>
 </ul>
-<h1>19、wowjs动画效果</h1>
-<h2 id="19-1-flip-动画效果">19.1  "flip"动画效果</h2>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__flip %}
+<h1 id="19、wowjs动画效果"><a href="#19、wowjs动画效果" class="headerlink" title="19、wowjs动画效果"></a>19、wowjs动画效果</h1><h2 id="19-1-“flip”动画效果"><a href="#19-1-“flip”动画效果" class="headerlink" title="19.1  “flip”动画效果"></a>19.1  “flip”动画效果</h2><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__flip %}
 {% note success %}
 <span class="token code-snippet code keyword">`flip`</span>动画效果。
 {% endnote %}
 {% endwow %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <div class="wow animate__flip" data-wow-duration="" data-wow-delay="" data-wow-offset="" data-wow-iteration=""><div class="note success"><p><code>flip</code>动画效果。</p>
 </div></div>
-<h2 id="19-2-zoomIn-动画效果">19.2  "zoomIn"动画效果</h2>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__zoomIn,5s,5s,100,10 %}
+<h2 id="19-2-“zoomIn”动画效果"><a href="#19-2-“zoomIn”动画效果" class="headerlink" title="19.2  “zoomIn”动画效果"></a>19.2  “zoomIn”动画效果</h2><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__zoomIn,5s,5s,100,10 %}
 {% note success %}
 <span class="token code-snippet code keyword">`zoomIn`</span>动画效果，持续<span class="token code-snippet code keyword">`5s`</span>，延时<span class="token code-snippet code keyword">`5s`</span>，离底部<span class="token code-snippet code keyword">`100`</span>距离时启动，重复<span class="token code-snippet code keyword">`10`</span>次
 {% endnote %}
 {% endwow %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <div class="wow animate__zoomIn" data-wow-duration="5s" data-wow-delay="5s" data-wow-offset="100" data-wow-iteration="10"><div class="note success"><p><code>zoomIn</code>动画效果，持续<code>5s</code>，延时<code>5s</code>，离底部<code>100</code>距离时启动，重复<code>10</code>次</p>
 </div></div>
-<h2 id="19-3-heartBeat-动画效果">19.3  "heartBeat"动画效果</h2>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__heartBeat,,5s,,10 %}
+<h2 id="19-3-“heartBeat”动画效果"><a href="#19-3-“heartBeat”动画效果" class="headerlink" title="19.3  “heartBeat”动画效果"></a>19.3  “heartBeat”动画效果</h2><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__heartBeat,,5s,,10 %}
 {% note success %}
 <span class="token code-snippet code keyword">`heartBeat`</span>动画效果，延时<span class="token code-snippet code keyword">`5s`</span>，重复<span class="token code-snippet code keyword">`10`</span>次。
 {% endnote %}
 {% endwow %}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <div class="wow animate__slideInRight" data-wow-duration="5s" data-wow-delay="5s" data-wow-offset="" data-wow-iteration=""><div class="note success"><p><code>slideInRight</code>动画效果，持续<code>5s</code>，延时<code>5s</code>。</p>
 </div></div>
-<h2 id="19-4-slideInRight-动画效果">19.4  "slideInRight"动画效果</h2>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__slideInRight,5s,5s %}
+<h2 id="19-4-“slideInRight”动画效果"><a href="#19-4-“slideInRight”动画效果" class="headerlink" title="19.4  “slideInRight”动画效果"></a>19.4  “slideInRight”动画效果</h2><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">{% wow animate__slideInRight,5s,5s %}
 {% note success %}
 <span class="token code-snippet code keyword">`slideInRight`</span>动画效果，持续<span class="token code-snippet code keyword">`5s`</span>，延时<span class="token code-snippet code keyword">`5s`</span>。
 {% endnote %}
@@ -1798,7 +1760,7 @@ description=不多说，这是真的大佬 %}
     
 
     <div class="container row center-align"
-         style="margin-bottom: 0px !important;">
+         style="margin-bottom: 15px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
@@ -1832,6 +1794,60 @@ description=不多说，这是真的大佬 %}
             <br>
 
             <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2024";
+                        var startMonth = "11";
+                        var startDate = "28";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
             
             <br>
             
@@ -2018,6 +2034,14 @@ $(function () {
     <script src="/js/matery.js"></script>
 
     
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
 
     
     
@@ -2089,7 +2113,7 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+<!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
 for(var i = 0;i<arr.length;i++){
     arr[i].classList.add('wow');
     arr[i].classList.add('animate__zoomIn');
@@ -2105,6 +2129,6 @@ for(var i = 0;i<arr.length;i++){
     arr[i].setAttribute('data-wow-delay', '');
     arr[i].setAttribute('data-wow-offset', '');
     arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body>
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body>
 
 </html>
