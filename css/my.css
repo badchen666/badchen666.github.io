@@ -1,4 +1,28 @@
 /* Here is your custom css styles. */
+/* 全局字体引入 */
+@font-face{
+    font-family: 'myFont';
+    src: url('../font/myFont.ttf');
+}
+
+body{
+    font-family: 'myFont';
+}
+
+/* 修改首页轮播的标题大小 */
+@media only screen and (max-width: 601px) {
+    .bg-cover .title {
+        font-size: 2.5rem;
+    }
+}
+
+/* 修改博客标题的字体大小 */
+@media only screen and (max-width: 601px) {
+    header .brand-logo .logo-span {
+        font-size: 1.5rem;
+    }
+}
+
 .uk-alert { 
     margin-bottom: 15px; 
     padding: 10px; background: #ebf7fd; 
@@ -1084,8 +1108,158 @@ body.DarkMode details > summary {
   color: #424242;
 }
 
+/* bubble */
+:root {
+  --bubble-text-color: #e9a218;
+  --bubble-text-hover-color: #2c7fe7;
+  --bubble-text-shadow: rgba(35,35,35,0.5);
+}
+body.DarkMode {
+  --bubble-text-color: #f2b94b;
+  --bubble-text-hover-color: #2c7fe7;
+  --bubble-text-shadow: rgba(35,35,35,0.5);
+}
+.bubble-content {
+  display: inline-block;
+  color: var(--bubble-text-color);
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  text-shadow: var(--bubble-text-shadow);
+}
+.bubble-content:hover {
+  transition: all 0.2s ease-in-out;
+  color: var(--bubble-text-hover-color);
+}
+.bubble-content:hover + .bubble-notation .bubble-item {
+  transform: translate(-40px, 10px) rotateX(0deg);
+  transition: all 0.5s ease-in-out;
+  opacity: 1;
+}
+.bubble-notation {
+  display: inline-block;
+}
+.bubble-item {
+  transition: all 0.5s ease-in-out;
+  opacity: 0;
+  color: #fff;
+  z-index: 99;
+  display: flex;
+  position: absolute;
+  transform: translate(-40px, 10px) rotateX(90deg);
+  width: auto;
+  height: auto;
+  max-width: 400px;
+  overflow: hidden;
+  padding: 20px 10px 10px 10px;
+  clip-path: polygon(5px 10px, 20px 10px, 30px 0, 40px 10px, calc(100% - 5px) 10px, 100% 15px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 15px, 5px 10px);
+}
 
+/* progress bar */
+.progress {
+  display: flex;
+  font-size: var(--global-font-size);
+  background-color: rgba(88,88,88,0.6);
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+  height: 2rem;
+  overflow: hidden;
+}
+.progress p {
+  margin: 0 0 0 10px !important;
+}
+.progress .progress-bar-animated {
+  background-color: #a7b5fd !important;
+  animation: progress-bar-stripes 1s linear infinite;
+}
+.progress .progress-bar-striped {
+  background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+  background-size: 1rem 1rem;
+}
+.progress .progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: visible;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #0d6efd;
+  transition: width 0.6s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .progress .progress-bar {
+    transition: none;
+  }
+}
+.progress .bg-green {
+  background-color: #28a745 !important;
+}
+.progress .bg-yellow {
+  background-color: #ffc107 !important;
+}
+.progress .bg-red {
+  background-color: #dc3545 !important;
+}
+.progress .bg-cyan {
+  background-color: #17a2b8 !important;
+}
+.progress .bg-blue {
+  background-color: #0d6efd !important;
+}
+.progress .bg-gray {
+  background-color: #7f838a !important;
+}
+@-moz-keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 1rem;
+  }
+}
+@-webkit-keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 1rem;
+  }
+}
+@-o-keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 1rem;
+  }
+}
+@keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 1rem;
+  }
+}
 
-
+/* reference */ 
+:root {
+  --referto-text-color: #e9a218;
+  --referto-text-hover-color: #2c7fe7;
+  --referto-literature-background-color: #318efd;
+  --referto-title-background-color: #183153;
+  --referto-content-text-color: #f1f1ef;
+  --referfrom-text-shadow: rgba(35,35,35,0.5);
+  --referfrom-text-color: #f1f1ef;
+  --referfrom-text-hover-color: #f2b94b;
+  --referfrom-link-color: #403e3b;
+  --referfrom-link-hover-color: #235dac;
+  --referfrom-background-color: #f1f1ef;
+  --reference-anchor-color: #183153;
+  --reference-anchor-up-color: #318efd;
+}
+body.DarkMode {
+  --referto-text-color: #f2b94b;
+  --referto-text-hover-color: #2c7fe7;
+  --referto-literature-background-color: #5c6167;
+  --referto-title-background-color: #090a0b;
+  --referto-content-text-color: #f1f1ef;
+  --referfrom-text-shadow: rgba(35,35,35,0.5);
+  --referfrom-text-color: #f1f1ef;
+  --referfrom-text-hover-color: #f2b94b;
+  --referfrom-link-color: #f1f1ef;
+  --referfrom-link-hover-color: #f2b94b;
+  --referfrom-background-color: rgba(92,97,103,0.68);
+  --reference-anchor-color: #090a0b;
+  --reference-anchor-up-color: #183153;
+}
 
 
