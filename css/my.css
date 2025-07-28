@@ -1369,6 +1369,7 @@ p .img-alt {
   display: inline-block;
   width: 100%;
 }
+/* special text */
 s,
 del {
   color: #8e8e8e;
@@ -1419,4 +1420,138 @@ kbd {
   -webkit-box-shadow: inset 0 0 20px #e8e8e8, 0 1px 0 #c3c3c3, 0 1px 0 #c9c9c9, 0 1px 2px #333;
   box-shadow: inset 0 0 20px #e8e8e8, 0 1px 0 #c3c3c3, 0 1px 0 #c9c9c9, 0 1px 2px #333;
   text-shadow: 0 1px 0 #f5f5f5;
+}
+
+/* label */
+.hl-label {
+  padding: 2px 4px;
+  color: #fff;
+}
+.hl-label.default {
+  background-color: #777;
+}
+.hl-label.blue {
+  background-color: blue;
+}
+.hl-label.pink {
+  background-color: pink;
+}
+.hl-label.red {
+  background-color: red;
+}
+.hl-label.purple {
+  background-color: purple;
+}
+.hl-label.orange {
+  background-color: orange;
+}
+.hl-label.green {
+  background-color: green;
+}
+
+/* tabs */
+.container .tabs {
+  position: relative;
+  margin: 0 0 20px;
+  border-right: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
+  overflow: hidden;
+}
+.container .tabs > .nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  background:#f0f0f0;
+}
+.container .tabs > .nav-tabs > .tab {
+  flex-grow: 1;
+  padding: 8px 18px;
+  border-top: 2px solid #f0f0f0;
+  background: #f0f0f0;
+  color: #1F2D3D;
+  line-height: 2;
+  transition: all 0.4s;
+}
+.container .tabs > .nav-tabs > .tab i {
+  width: 1.5em;
+}
+.container .tabs > .nav-tabs > .tab.active {
+  border-top: 2px solid #49B1F5;
+  background: var(--tab-button-active-bg);
+  cursor: default;
+}
+.container .tabs > .nav-tabs > .tab:not(.active):hover {
+  border-top: 2px solid var(--tab-button-hover-bg);
+  background: var(--tab-button-hover-bg);
+}
+.container .tabs > .nav-tabs.no-default ~ .tab-to-top {
+  display: none;
+}
+.container .tabs > .tab-contents .tab-item-content {
+  position: relative;
+  display: none;
+  padding: 36px 24px 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .container .tabs > .tab-contents .tab-item-content {
+    /* 在 maxWidth768() 中的样式替换为具体内容 */
+    position: relative; /* 如果需要 */
+    display: block; /* 或其他样式 */
+    padding: 20px; /* 替换为 maxWidth768 中应有的值 */
+  }
+}
+
+.container .tabs > .tab-contents .tab-item-content.active {
+  display: block;
+  animation: tabshow 0.5s;
+}
+
+.container .tabs > .tab-contents .tab-item-content > :last-child {
+  margin-bottom: 0;
+}
+.container .tabs > .tab-to-top {
+  padding: 0 16px 10px 0;
+  width: 100%;
+  text-align: right;
+}
+.container .tabs > .tab-to-top button {
+  color: #99a9bf;
+}
+.container .tabs > .tab-to-top button:hover {
+  color: #49B1F5;
+}
+@-moz-keyframes tabshow {
+  0% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes tabshow {
+  0% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@-o-keyframes tabshow {
+  0% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes tabshow {
+  0% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
