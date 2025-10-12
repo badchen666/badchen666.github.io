@@ -2,10 +2,14 @@
 /* 全局字体引入 */
 @font-face{
     font-family: 'myFont';
-    src: url('../font/myFont.ttf');
+    src: url('font/Circle.ttf');
 }
 
 body{
+    font-family: 'myFont';
+}
+
+.diy-Font{
     font-family: 'myFont';
 }
 
