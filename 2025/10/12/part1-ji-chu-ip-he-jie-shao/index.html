@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Badchenの赛博小窝">
-    <meta name="description" content="">
+    <meta name="keywords" content="一、基础IP核介绍, Badchenの赛博小窝">
+    <meta name="description" content="在进行系统搭建时查阅了很多资料并积累了一些心得，将其汇总便于日后参考">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Badchenの赛博小窝</title>
+    <title>一、基础IP核介绍 | Badchenの赛博小窝</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
     <style>
@@ -59,7 +59,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -607,13 +607,13 @@
 
 
 
-<!-- <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')"> -->
+<!-- <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')"> -->
 <div class="bg-cover pd-header post-cover" style="background-color: rgba(0, 0, 0, 0);">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">一、基础IP核介绍</h1>
                 </div>
             </div>
         </div>
@@ -642,6 +642,19 @@
                 </div>
                 <div class="col s5 right-align">
                     
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" class="post-category">
+                                开发经验
+                            </a>
+                        
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/2025%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                2025嵌入式
+                            </a>
+                        
+                    </div>
+                    
                 </div>
             </div>
 
@@ -663,7 +676,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    3.3k
                 </div>
                 
 
@@ -688,7 +701,290 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <p>这部分介绍的IP具有普适性，即使在进行其它设计时也极有可能有应用，属于基础中的基础。</p>
+<h1>1.ZYNQ7 Processing System</h1>
+<p>通过对该 IP 进行功能配置，可以自定义Soc系统实现“量身定制”的效果，ZYNQ-7000系列内置双ARM-A9核，资源十分丰富，因此在这里只取我们用到的模块进行详细介绍。<br>
+首先打开该 IP 核，映入眼帘的是如下配置：</p>
+<div class="tip cogs"><p>ZYNQ-7000 IP配置</p>
+</div>
+<p><img src="/medias/images/zynq7.png" alt="ZYNQ-7000 IP配置界面"></p>
+<p>在该项目中，我们主要应用了片上的<strong>AXI-GP、HP接口进行数据传输，DDR3做缓存，PS-PL中断处理，串口输出调试，PS-PL端时钟配置</strong>，下面分别进行详细介绍：</p>
+<h2 id="1-1-AXI-HP-GP-Interface">1.1 AXI HP/GP Interface</h2>
+<div class="tip cogs"><p>AXI HP/GP Interface配置</p>
+</div>
+<p><img src="/medias/images/axigphp.png" alt="AXI GP与AXI HP"></p>
+<p>从中可以看出，<strong>对于GP（general purpose）通用目的接口，有两主两从共四个接口</strong>；<strong>对于HP（high-performance purpose）高性能接口，四接口均为从接口</strong>。GP接口直接连接到的是中央互联区（central interconnect），然后由中央互联区再连接到OCM interconnect和存储器接口上；而HP接口直接连接到的是OCM interconnect和存储器接口。所以对于GP接口，通常使用他进行控制配置；而对于HP接口，通常使用它进行数据传输交互。</p>
+<p>在本工程中，我们使用HP接口实现DDR存储器与ZYNQ的高效数据交互，采用GP接口进行轻量传输，如寄存器配置、GPIO读写等。</p>
+<p>4个AXI HP接口为PL的主机提供了DDR和OCM存储器的高带宽的数据路径。<strong>每个HP接口包括两个的FIFO缓存，用于读写传输</strong>。PL到内存互连高速AXI HP端口路由连接到两个DDR内存端口和一个OCM存储器端口。AXI HP接口也被称为AFI (AXI FIFO接口)，以强调它们的缓冲功能。</p>
+<div class="tip "><p>AXI HP接口主要特点</p>
+</div>
+<details class="folding-tag"><summary> AXI HP接口框图 </summary>
+              <div class="content">
+              <p><img src="/medias/images/axihp.png" alt="有两组AXI端口，一组直接连接到PL，另一组连接到AXI互连矩阵，允许访问DDR和OCM内存"></p>
+              </div>
+            </details>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>可以实现32或64位数据位宽的主接口(每个端口独立编程)。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>在32位接口模式下，可以进行动态配置位为64位，以实现对齐传输，通过AxCACHE [1]可以进行控制。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>在32位接口模式下，为未对齐的32位传输自动扩展到64位。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>可编程的写命令释放阈值。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>PL和PS之间的所有AXI接口的异步时钟域交叉。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>使用1kb (128 × 64位)数据缓存FIFO来平滑“长延迟”传输，用于读写。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>从PL端口提供QoS信令。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>命令和数据FIFO填充级计数可用于PL端。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>支持标准AXI 3.0接口。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>可编程命令下发到互连，分别用于读和写命令。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>14到70个指令范围的高性能从接口读接受能力。(取决于突发长度)</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>8到32个指令范围的高性能从接口写接受能力。(取决于突发长度)</p>
+            </div>
+<p>AXI_GP接口直接连接到主互连和从互连的端口，没有任何额外的FIFO缓冲，不像AXI_HP接口使用FIFO缓冲以提高性能和吞吐量。因此，性能受到主互连端口和从互连端口的限制。这些接口仅用于通用用途，并不是为了实现高性能。主机接口具有发起读写的权限，<strong>ARM 可以利用两个 AXI GP 主机接口主动访问 PL 逻辑，其实就是把 PL 映射到某个地址，读写 PL 寄存器。</strong></p>
+<div class="tip "><p>AXI GP接口主要特点</p>
+</div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>支持标准AXI协议。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>数据总线宽度只有32位。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>主端口ID位宽为12位。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>主端口发送能力:8位读，8位写。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>从端口ID位宽为6位。</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>从端口接受能力:8位读，8位写。</p>
+            </div>
+<h2 id="1-2-DDR3">1.2 DDR3</h2>
+<p>对于图像处理等大数据量的数据交互来说，PL端的BRAM毕竟容量有限，很难用BRAM作为两者间的数据缓存器。对于本项目要实现的Yolo v5应用来说，利用DDR3作为PS端与PL端之间交互的数据缓存器是最合适不过的。同时考虑到总线带宽，在实际应用时最好采用AXI-Stream而不是轻量级的AXI-Lite，这一点后面会进行详细说明。</p>
+<p>ZYNQ 7000系列分别内置两片512MB PL DDR3与两片512MB PS DDR3，其中PL端DDR3可以通过MIG(Memory Interface Generator) IP进行配置，PS端DDR3则只需enable ddr并正确配置型号等参数即可顺利驱动，该IP会将我们输入输出的数据自动转为符合ddr的读写时序，并通过自带的DDR Interface实现交互。</p>
+<div class="tip cogs"><p>DDR3配置</p>
+</div>
+<p><img src="/medias/images/zynqddr.png" alt="DDR3配置图"></p>
+<p>从中不难看出，DDR3的型号为 MT41K256M16 RE-125 ，通过该命名我们也可以得知关于该DDR3的一系列信息，有助于我们确定配置参数：</p>
+<div class="checkbox blue"><input type="radio">
+            <p>MT41K：Micron Technology公司生产的DDR3 SDRAM芯片系列的型号。</p>
+            </div>
+<div class="checkbox blue"><input type="radio">
+            <p>256M：芯片的容量是256Mb（兆位），即32MB（兆字节）。</p>
+            </div>
+<div class="checkbox blue"><input type="radio">
+            <p>16：内存芯片的位宽，表示单个存储单元的位数，通常为8位或16位。</p>
+            </div>
+<div class="checkbox blue"><input type="radio">
+            <p>RE-125：最大读写频率800MHz（1G/125*100）</p>
+            </div>
+<p>关于ddr3的读写时序，会在后面进行详细说明，这里仅介绍相关配置，以成功驱动为主。</p>
+<h2 id="1-3-PS-PL中断处理">1.3 PS-PL中断处理</h2>
+<p>通过用户手册不难得知，在ZYNQ系统中，中断可以分为三大类，其架构图如下所示：</p>
+<p><img src="/medias/images/zynqintframe.png" alt="ZNYQ中断架构图"></p>
+<div class="checkbox blue"><input type="radio">
+            <p>SGI（Software Generated Interrupt），软件生成的中断，共 16 个端口，中断号0~15；</p>
+            </div>
+<div class="checkbox blue"><input type="radio">
+            <p>PPI（Private Peripheral Interrupt</p>
+            </div>
+<div class="checkbox blue"><input type="radio">
+            <p>SPI（Shared Peripheral Interrupt），共享外设中断，来自于 44 个 PS 端的IO 外设以及 16 个 PL 端的中断，中断号32~95。</p>
+            </div>
+<p>中断相关配置如下图所示，作为开发者，我们只能对第三类SPI中断进行配置，而从中可以看出，该中断子系统又可以分为两种，分别是PL-PS Interrupt和PS-PL Interrupt。<br>
+在本项目中我们只启用前者，因此对后者仅作简单介绍。</p>
+<div class="tip cogs"><p>Interrupt配置</p>
+</div>
+<p><img src="/medias/images/zynqint.png" alt="ZYNQ中断相关配置图"></p>
+<div class="tip "><p>PL-PS Interrupt</p>
+</div>
+<p>顾名思义，是由PL端发出PS端接收的中断信号，PS 最大可以接收 16 个来自 PL 的中断信号，都是上升沿或高电平触发。相应地，在PS中启用GIC（Generic Interrupt Controller）或使用Zynq的专用中断控制器。并编写中断处理程序，处理来自PL的中断信号，通过中断程序与PL进行进一步的数据交换。</p>
+<div class="tip "><p>PS-PL Interrupt</p>
+</div>
+<p>顾名思义，是由PS端发出PL端接收的中断信号，从中断配置图中我们也可看出可以配置中断的资源十分丰富，需要我们根据实际应用自己决定，中断信号可以通过 AXI 控制总线或专用信号直接触发。通常情况下，可以在PS端通过中断信号告诉PL可以开始执行某些操作，从而实现特定逻辑的优先处理。</p>
+<h2 id="1-4-ZYNQ的串口配置">1.4 ZYNQ的串口配置</h2>
+<p>ZYNQ的串口同样具备STM32中的各种功能，不过在这里我们只是利用它输出一些调试结果，所以进行最基本的配置即可，软件端Xilinx的官方库文件会帮我们处理好剩下的一切</p>
+<div class="tip cogs"><p>UART配置</p>
+</div>
+<p><img src="/medias/images/zynquart.png" alt="ZYNQ UART相关配置"></p>
+<h2 id="1-5-PL-PS端时钟设置">1.5 PL-PS端时钟设置</h2>
+<p>PS 时钟子系统生成的所有时钟都来自三个可编程 PLL 之一：CPU、DDR 和 I/O。正常模式下，PLL被启用，并由PS_CLK时钟管脚驱动。在Bypass模式中，PS_CLK代替PLL向各时钟发射器提供时钟源。在这里我们给出如下配置并进行简单说明。</p>
+<div class="tip cogs"><p>Clock System配置</p>
+</div>
+<p><img src="/medias/images/zynqclk.png" alt="ZYNQ 时钟系统配置"></p>
+<p>其中Input Frequency默认为33.333MHz，由内部晶振产生，CPU Clock Ratio默认为6：2：1，实际上代表着一种工作模式。</p>
+<div class="tip "><p>DDR Clock</p>
+</div>
+<p>DDR_3x与DDR_2x是相互独立的。DDR_3x时钟域包括DDR内存控制器；DDR_2x时钟域主要用于AXI_HP接口和互连。</p>
+<div class="tip "><p>PL Clock</p>
+</div>
+<p>PS向PL提供四个时钟，分别是PL_FCLK 0、PL_FCLK 1、PL_FCLK 2、PL_FCLK 3。四个时钟来自 PS 中的PLL可单独选择。用户可根据需求设置时钟频率。<br>
+同时对每个PL时钟，也可以设置其相应的复位信号是否使能。</p>
+<div class="tip "><p>IOP Module Clock</p>
+</div>
+<p>IOP 模块时钟（用于内部控制器逻辑）可以由时钟子系统或在某些情况下由 IOP 的外部接口生成。 在所有情况下，IOP 的控制和状态寄存器均由其 AMBA 接口时钟 (CPU_1x) 提供时钟。</p>
+<h1>2.AXI Interconnect</h1>
+<p>AXI InterConnect可以对AXI总线进行管理，支持<strong>多个主机采用AXI总线访问从机，或者一个主机访问多个从机</strong>。真正实现了总线通信，N Master模块与M Slave模块的通信，减少了相互间通信的复杂度，内部实现时钟域转换，不需要外部的过度干预，内部可实现FIFO等，免去了很多场景下需要FIFO，Register，位宽转换，协议转换的需求。</p>
+<p>该IP核最多可以支持16个主设备、16个从设备，如果需要更多的接口，可以多加入几个IP核，通常该IP核在Block Design中用的比较多，下面介绍一下在Block Design中的用法。在Block Design中通常会简化IP核的用法，但是可以自动布线。对于AXI这种信号比较多的信号，在Block Design中也更方便一些。</p>
+<p><strong>为了便于总线管理，在应用时通常设置两个AXI Interconnect模块，一个一主多从一个一从多主，实现ZYNQ ARM核与多外设的交互。</strong></p>
+<div class="tip "><p>单个主机访问多个从机</p>
+</div>
+<p>单个主机访问多个从机的原理是采用为从机的AXI总线分配不同的地址，这样主机通过访问不同的地址分区来访问不同的从机。</p>
+<div class="tip "><p>单个主机访问多个从机</p>
+</div>
+<p>多个主机读写一个从机是通过主机的ID号不同来实现的，每个主机具有不同的ID号，内部通过读写的时候地址会把这个主机号加上，代表哪个主机进行访问，传回的数据就传到相应的主机。<strong>当主机同时访问从机时，还可以设置主机的优先级进行判别哪一个主机进项访问。</strong></p>
+<p><img src="/medias/images/axiinterconnect.png" alt="IP核架构图"></p>
+<h1>3.Processor System Reset</h1>
+<p>该复位模块允许客户通过设置某些参数来启用/禁用功能，从而根据自己的应用来定制设计。主要支持下列功能：</p>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>使异步外部复位（External Reset）信号与时钟同步</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>使异步辅助复位（Auxillary Reset）信号与时钟同步</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>可选外部/辅助复位信号是低电平有效还是高电平有效</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>可选复位信号需持续的最小脉宽</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>可选负载均衡</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>DCM锁定输入</p>
+            </div>
+<div class="checkbox green checked"><input type="checkbox" checked="checked">
+            <p>生成上电复位信号</p>
+            </div>
+<div class="tip cogs"><p>IP核配置相关说明</p>
+</div>
+<p><img src="/medias/images/zynqsysrst.png" alt="配置选项说明"></p>
+<div class="tip cogs"><p>IP核接口相关说明</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>方向</th>
+<th>位宽</th>
+<th>有效电平</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slowest_sync_clk</td>
+<td>I</td>
+<td>1</td>
+<td>-</td>
+<td>最慢同步时钟</td>
+</tr>
+<tr>
+<td>ext_reset_in</td>
+<td>I</td>
+<td>1</td>
+<td>可配置，默认低电平有效</td>
+<td>外部复位</td>
+</tr>
+<tr>
+<td>aux_reset_in</td>
+<td>I</td>
+<td>1</td>
+<td>可配置，默认低电平有效</td>
+<td>辅助复位</td>
+</tr>
+<tr>
+<td>mb_debug_sys_rst</td>
+<td>I</td>
+<td>1</td>
+<td>高</td>
+<td>总线调试复位</td>
+</tr>
+<tr>
+<td>dcm_locked</td>
+<td>I</td>
+<td>1</td>
+<td>高</td>
+<td>dcm的locked信号</td>
+</tr>
+<tr>
+<td>mb_reset</td>
+<td>O</td>
+<td>1</td>
+<td>高</td>
+<td>总线复位</td>
+</tr>
+<tr>
+<td>bus_struct_reset</td>
+<td>O</td>
+<td>1 ~ 8，默认1</td>
+<td>高</td>
+<td>总线高电平复位</td>
+</tr>
+<tr>
+<td>peripheral_reset</td>
+<td>O</td>
+<td>1 ~ 16，默认1</td>
+<td>高</td>
+<td>外设高电平复位</td>
+</tr>
+<tr>
+<td>interconnect_aresetn</td>
+<td>O</td>
+<td>1 ~ 8，默认1</td>
+<td>低</td>
+<td>互联低电平复位</td>
+</tr>
+<tr>
+<td>peripheral_aresetn</td>
+<td>O</td>
+<td>1 ~ 16，默认1</td>
+<td>低</td>
+<td>外设低电平复位</td>
+</tr>
+</tbody>
+</table>
+<h1>4.Clocking Wizard</h1>
+<p>这是一个应用十分广泛的时钟管理IP，可以使用户根据自己喜好，根据输入时钟实现倍频、分频、占空比、相位等一系列配置。<strong>在本项目中，我们用它产生视频流时序需要的时钟</strong>。</p>
+<div class="tip cogs"><p>IP核配置相关说明</p>
+</div>
+<p><img src="/medias/images/clockingwizard.png" alt="Clocking Options说明"></p>
+<p><img src="/medias/images/clocking.png" alt="Output Clocks说明"></p>
+<ul>
+<li>
+<p>PLL(Phase Locked Loop)：为锁相回路或锁相环，用来统一整合时钟信号，使高频器件正常工作，如内存的存取资料等。PLL用于振荡器中的反馈技术。 许多电子设备要正常工作，通常需要外部的输入信号与内部的振荡信号同步。一般的晶振由于工艺与成本原因，做不到很高的频率，而在需要高频应用时，由相应的器件VCO，实现转成高频，但并不稳定，故利用锁相环路就可以实现稳定且高频的时钟信号。其具有时钟倍频、分频、相位偏移和可编程占空比的功能。</p>
+</li>
+<li>
+<p>MMCM(Mixed Mode Clock Manager)：混合模式时钟管理器， MMCM 功能是 PLL 的超集， 在PLL的基础上加上了相位动态调整功能，因为PLL是模块电路，而动态调相是数字电路，所以叫Mixed Mode。MMCM是在Virtex-6中被引入的，而且Virtex-6中也只有MMCM。</p>
+</li>
+</ul>
+<div class="reference-source"><span class="hidden-anchor" id="referfrom_[1]"></span><a class="reference-anchor" href="#referto_[1]">[1]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/FPGADesigner/article/details/88379785">学会Zynq（2）Zynq-7000处理器的配置详解</a></div>
+<div class="reference-source"><span class="hidden-anchor" id="referfrom_[2]"></span><a class="reference-anchor" href="#referto_[2]">[2]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41445387/article/details/116269817">ZYNQ-AXI_GP接口和AXI_HP接口的异同</a></div>
+<div class="reference-source"><span class="hidden-anchor" id="referfrom_[3]"></span><a class="reference-anchor" href="#referto_[3]">[3]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/Learning1232/article/details/134200443?ops_request_misc=%257B%2522request%255Fid%2522%253A%25222ce61a30e52ddd8e0350d2c63dff60f6%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=2ce61a30e52ddd8e0350d2c63dff60f6&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-134200443-null-null.142^v102^pc_search_result_base1&amp;utm_term=ZYNQ%20%E4%B8%AD%E6%96%AD&amp;spm=1018.2226.3001.4187">【ZYNQ入门】第二篇、ZYNQ的中断系统及常用中断初始化程序</a></div>
+<div class="reference-source"><span class="hidden-anchor" id="referfrom_[4]"></span><a class="reference-anchor" href="#referto_[4]">[4]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/m0_58161554/article/details/128055813?spm=1001.2101.3001.6650.8&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-128055813-blog-142266353.235%5Ev43%5Epc_blog_bottom_relevance_base9&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-8-128055813-blog-142266353.235%5Ev43%5Epc_blog_bottom_relevance_base9&amp;utm_relevant_index=12">利用AXI VDMA 实现OV5640摄像头采集(1)</a></div>
+<div class="reference-source"><span class="hidden-anchor" id="referfrom_[5]"></span><a class="reference-anchor" href="#referto_[5]">[5]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/Cfx1998/article/details/130323235">嵌入式开发之DDR硬件知识扫盲</a></div>
                 
             </div>
             <hr/>
@@ -714,7 +1010,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://badchen666.github.io/2025/10/12/part2-xi-tong-gai-lan/">https://badchen666.github.io/2025/10/12/part2-xi-tong-gai-lan/</a>
+                    <a href="https://badchen666.github.io/2025/10/12/part1-ji-chu-ip-he-jie-shao/">https://badchen666.github.io/2025/10/12/part1-ji-chu-ip-he-jie-shao/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1011,19 +1307,19 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2025/10/12/part2-xi-tong-gai-lan/">
+                <a href="/2025/10/12/part1-ji-chu-ip-he-jie-shao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="一、基础IP核介绍">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">一、基础IP核介绍</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            在进行系统搭建时查阅了很多资料并积累了一些心得，将其汇总便于日后参考
                         
                     </div>
                     <div class="publish-info">
@@ -1032,8 +1328,16 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Badchen666
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" class="post-category">
+                                    开发经验
+                                </a>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/2025%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    2025嵌入式
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -1049,13 +1353,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/10/12/part1-ip-he-jie-shao/">
+                <a href="/2025/10/12/part2-shi-pin-ip-he-jie-shao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="一、基础IP核介绍">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="二、视频相关IP介绍">
                         
-                        <span class="card-title">一、基础IP核介绍</span>
+                        <span class="card-title">二、视频相关IP介绍</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1225,7 +1529,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">9.8k</span>
+                        class="white-color">14.7k</span>
             
             
             
@@ -1565,7 +1869,7 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+<!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
 for(var i = 0;i<arr.length;i++){
     arr[i].classList.add('wow');
     arr[i].classList.add('animate__zoomIn');
@@ -1581,6 +1885,6 @@ for(var i = 0;i<arr.length;i++){
     arr[i].setAttribute('data-wow-delay', '');
     arr[i].setAttribute('data-wow-offset', '');
     arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body>
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body>
 
 </html>
