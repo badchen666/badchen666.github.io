@@ -2191,13 +2191,15 @@ body.DarkMode .theme-btn:hover {
 .post-container .note {
     border-radius: 0;
     margin-bottom: 20px;
-    padding: 1em;
+    /* 轻微调整上下内边距，使视觉更居中并减少下边距影响 */
+    padding: 0.85em 1em 0.7em;
     position: relative;
     border: 1px solid #eee;
     border-left-width: 5px;
     font-size: 16px;
-    height: 70px; /* 显式固定高度为 100px */
-    overflow: hidden; /* 内容超出时隐藏 */
+    /* 动态高度：让内容自然撑开容器 */
+    height: auto;
+    overflow: visible;
 }
 .post-container .note summary {
     cursor: pointer;
@@ -2224,7 +2226,8 @@ body.DarkMode .theme-btn:hover {
     font-size: 1.5em;
     left: 0.3em;
     position: absolute;
-    top: calc(50% - 0.75em);
+    /* 动态高度下，改为相对内边距的顶部对齐，可按需微调 */
+    top: 0.6em;
 }
 .post-container .note.default {
     border-left-color: #777;

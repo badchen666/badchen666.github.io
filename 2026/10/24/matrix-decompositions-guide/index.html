@@ -1,0 +1,2061 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="矩阵分解学习笔记：从 LU 到 SVD 的九种分解, Badchenの赛博小窝">
+    <meta name="description" content="从四页手写笔记出发，串起 LU、LDV、满秩、普通谱、Hermite、QR、Schur、SVD 与极分解：适用条件、计算步骤、几何直觉和复习自测。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>矩阵分解学习笔记：从 LU 到 SVD 的九种分解 | Badchenの赛博小窝</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAJHp2iDSHaU6f4Otc_rzGXGNWBXuLQyAAIUGgAC4hIYVC7RgHmrTTKGNgQ.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Badchenの赛博小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>归档</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>标签</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/article" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-file" style="zoom: 0.6;"></i>
+      
+      <span>文章</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/">
+          
+          <i class="fas fa-gears" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>开发经验</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E6%B8%B8%E6%88%8F%E4%B9%8B%E6%97%85/">
+          
+          <i class="fas fa-gamepad" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>游戏心得</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">
+          
+          <i class="fas fa-person-chalkboard" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>实用技巧</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/">
+          
+          <i class="fas fa-chart-simple" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>生活随想</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/project" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>项目</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/">
+          
+          <i class="fas fa-computer" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>软件相关</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+          
+          <i class="fas fa-link" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>嵌入式</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/">
+          
+          <i class="fas fa-microchip" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>硬件相关</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/project/statistics">
+          
+          <i class="fas fa-chart-simple" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>数据统计</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/relaxation" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-face-smile" style="zoom: 0.6;"></i>
+      
+      <span>休闲</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/relaxation/musics">
+          
+          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Musics</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/relaxation/movies">
+          
+          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Movies</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友人帐</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Badchenの赛博小窝</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-home"></i>
+			
+			首页
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+		          <span>归档</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+		          <span>标签</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-file"></i>
+			
+			文章
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-gears" style="position: absolute;left:50px" ></i>
+			      
+		          <span>开发经验</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E4%B9%8B%E6%97%85/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-gamepad" style="position: absolute;left:50px" ></i>
+			      
+		          <span>游戏心得</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-person-chalkboard" style="position: absolute;left:50px" ></i>
+			      
+		          <span>实用技巧</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-chart-simple" style="position: absolute;left:50px" ></i>
+			      
+		          <span>生活随想</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bookmark"></i>
+			
+			项目
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-computer" style="position: absolute;left:50px" ></i>
+			      
+		          <span>软件相关</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-link" style="position: absolute;left:50px" ></i>
+			      
+		          <span>嵌入式</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-microchip" style="position: absolute;left:50px" ></i>
+			      
+		          <span>硬件相关</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/project/statistics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-chart-simple" style="position: absolute;left:50px" ></i>
+			      
+		          <span>数据统计</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-face-smile"></i>
+			
+			休闲
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/relaxation/musics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Musics</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/relaxation/movies " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Movies</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友人帐
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<!-- <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/posts/matrix-decompositions/cover.svg')"> -->
+<div class="bg-cover pd-header post-cover" style="background-color: rgba(0, 0, 0, 0);">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">矩阵分解学习笔记：从 LU 到 SVD 的九种分解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                                <span class="chip bg-color">线性代数</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/">
+                                <span class="chip bg-color">矩阵分解</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">学习笔记</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" class="post-category">
+                                开发经验
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2026-10-24
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2026-10-24
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.7k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <link rel="stylesheet" href="/medias/posts/matrix-decompositions/study.css">
+<div class="note info"><p><strong>阅读建议</strong>：第一次学，按“符号 → LU / 满秩 → 谱 / QR → Schur / SVD / 极分解”的顺序阅读；考前回顾，先看速查表，再做文末自测。本文依据四页手写笔记整理，保留原有九类分解，另补充计算例子、适用条件和容易混淆的边界。</p>
+</div>
+<p>矩阵分解的共同想法很朴素：把一次复杂的线性变换，拆成几次结构清楚、容易计算的变换。真正需要记住的是<strong>它在拆什么、什么时候能拆、拆完有什么用</strong>。每一节都可以用“把因子乘回去”检查自己的理解。</p>
+<h2 id="1-先统一符号"><a href="#1-先统一符号" class="headerlink" title="1. 先统一符号"></a>1. 先统一符号</h2><p>默认在复数域讨论，实矩阵是其中的特殊情形。</p>
+<div class="table-container">
+<div class="matrix-study-table"><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>含义</th>
+<th>读法提醒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><script type="math/tex">A\in\mathbb C^{m\times n}</script></td>
+<td><script type="math/tex">m</script> 行、<script type="math/tex">n</script> 列矩阵</td>
+<td>把 <script type="math/tex">n</script> 维输入映到 <script type="math/tex">m</script> 维输出</td>
+</tr>
+<tr>
+<td><script type="math/tex">A^T</script>、<script type="math/tex">A^H</script></td>
+<td>转置、共轭转置</td>
+<td>实矩阵的 <script type="math/tex">A^H=A^T</script></td>
+</tr>
+<tr>
+<td><script type="math/tex">\mathcal R(A)</script>、<script type="math/tex">\mathcal N(A)</script></td>
+<td>列空间、零空间</td>
+<td>分别是“能输出什么”和“什么会被压成零”</td>
+</tr>
+<tr>
+<td><script type="math/tex">r=\operatorname{rank}(A)</script></td>
+<td>秩</td>
+<td>独立列的个数，也是有效变换维数</td>
+</tr>
+<tr>
+<td><script type="math/tex">U^HU=UU^H=I</script></td>
+<td>方阵 <script type="math/tex">U</script> 是酉矩阵</td>
+<td>实数情形称正交矩阵，保持长度与夹角</td>
+</tr>
+<tr>
+<td><script type="math/tex">Q^HQ=I</script></td>
+<td><script type="math/tex">Q</script> 的列向量标准正交</td>
+<td><script type="math/tex">Q</script> 可以是长方阵，未必有 <script type="math/tex">QQ^H=I</script></td>
+</tr>
+<tr>
+<td><script type="math/tex">A^H=A</script></td>
+<td>Hermite（厄米）矩阵</td>
+<td>实数情形就是实对称矩阵</td>
+</tr>
+<tr>
+<td><script type="math/tex">A^HA=AA^H</script></td>
+<td>正规矩阵</td>
+<td>Hermite 是正规矩阵的一类</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p><strong>先看维度，再看条件，最后看乘法顺序。</strong> 矩阵乘法一般不能交换；<script type="math/tex">A=PQ</script> 表示对输入先作用 <script type="math/tex">Q</script>，再作用 <script type="math/tex">P</script>。</p>
+<h2 id="2-九种分解速查"><a href="#2-九种分解速查" class="headerlink" title="2. 九种分解速查"></a>2. 九种分解速查</h2><div class="table-container">
+<div class="matrix-study-table"><table>
+<thead>
+<tr>
+<th>分解</th>
+<th>形式</th>
+<th>本文采用的条件</th>
+<th>最值得记住的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LU</td>
+<td><script type="math/tex">A=LU</script></td>
+<td>无换行消元可进行；非奇异情形等价于所有顺序主子式非零</td>
+<td>把消元过程存起来，反复解方程</td>
+</tr>
+<tr>
+<td>LDV</td>
+<td><script type="math/tex">A=LDV</script></td>
+<td>前 <script type="math/tex">n-1</script> 阶顺序主子式非零即可保证一种这样的分解</td>
+<td>将上三角因子的对角缩放单独取出</td>
+</tr>
+<tr>
+<td>满秩分解</td>
+<td><script type="math/tex">A=BC</script></td>
+<td>任意非零秩的 <script type="math/tex">m\times n</script> 矩阵</td>
+<td>提取列空间的一组基及坐标</td>
+</tr>
+<tr>
+<td>普通谱分解</td>
+<td><script type="math/tex">A=S\Lambda S^{-1}=\sum\lambda_iP_i</script></td>
+<td>方阵可对角化</td>
+<td>按特征子空间拆解变换</td>
+</tr>
+<tr>
+<td>Hermite 谱分解</td>
+<td><script type="math/tex">A=U\Lambda U^H</script></td>
+<td><script type="math/tex">A^H=A</script></td>
+<td>用正交特征方向和实数缩放描述变换</td>
+</tr>
+<tr>
+<td>QR / UR</td>
+<td><script type="math/tex">A=QR</script></td>
+<td>本文先讲满列秩的精简形式</td>
+<td>将列向量正交化，处理最小二乘</td>
+</tr>
+<tr>
+<td>Schur</td>
+<td><script type="math/tex">A=UTU^H</script></td>
+<td>任意复方阵</td>
+<td>保持正交基，将矩阵化为上三角</td>
+</tr>
+<tr>
+<td>SVD</td>
+<td><script type="math/tex">A=U\Sigma V^H</script></td>
+<td>任意实、复长方阵</td>
+<td>连接输入与输出的正交方向，做低秩近似</td>
+</tr>
+<tr>
+<td>极分解</td>
+<td><script type="math/tex">A=PQ</script></td>
+<td>本文讲任意实、复方阵</td>
+<td>分开长度保持部分与半正定伸缩部分</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="note warning"><p><strong>“存在一种分解”与“能按指定算法、唯一地求出分解”是不同问题。</strong> 比如奇异矩阵也可能有 LU；遇到零主元时，通常改用带行置换的 <script type="math/tex">PA=LU</script>。不要直接把“可逆”当成“不用换行”的保证。</p>
+</div>
+<h2 id="3-LU：把高斯消元保存下来"><a href="#3-LU：把高斯消元保存下来" class="headerlink" title="3. LU：把高斯消元保存下来"></a>3. LU：把高斯消元保存下来</h2><h3 id="3-1-L-和-U-分别记录什么"><a href="#3-1-L-和-U-分别记录什么" class="headerlink" title="3.1 L 和 U 分别记录什么"></a>3.1 L 和 U 分别记录什么</h3><script type="math/tex; mode=display">A=LU,\qquad
+L=\begin{bmatrix}1&0&0\\l_{21}&1&0\\l_{31}&l_{32}&1\end{bmatrix},\quad
+U=\begin{bmatrix}u_{11}&u_{12}&u_{13}\\0&u_{22}&u_{23}\\0&0&u_{33}\end{bmatrix}.</script>
+<p><script type="math/tex">U</script> 是消元后的结果；<script type="math/tex">L</script> 保存<strong>反向恢复消元</strong>需要的信息。若消元矩阵依次是 <script type="math/tex">E_1,\ldots,E_k</script>，那么</p>
+<script type="math/tex; mode=display">E_k\cdots E_2E_1A=U,\qquad
+A=E_1^{-1}E_2^{-1}\cdots E_k^{-1}U.</script>
+<p>因此 <script type="math/tex">L=E_1^{-1}\cdots E_k^{-1}</script>。例如，操作 <script type="math/tex">r_2\leftarrow r_2-l_{21}r_1</script> 的消元矩阵在 <script type="math/tex">(2,1)</script> 位置是 <script type="math/tex">-l_{21}</script>，它的逆在相同位置是 <script type="math/tex">+l_{21}</script>。</p>
+<details class="folding-tag" blue=""><summary> 为什么 L 的对角线一直是 1？ </summary>
+              <div class="content">
+              <p>只做“某行减去前面一行的若干倍”时，消元矩阵及其逆都是单位下三角矩阵。两个单位下三角矩阵相乘仍是单位下三角：乘积对角元求和中，只有中间指标等于当前行号的项可能非零，因此对角元是 <script type="math/tex">1\cdot1=1</script>。重复相乘就得到结论。</p><p>这里的条件是按标准消元顺序使用前面的主元行；任意行变换并不都对应单位下三角矩阵。</p>
+              </div>
+            </details>
+<h3 id="3-2-原笔记例题：完整算一次"><a href="#3-2-原笔记例题：完整算一次" class="headerlink" title="3.2 原笔记例题：完整算一次"></a>3.2 原笔记例题：完整算一次</h3><p>按原稿作者确认，矩阵第三行首元素为 <script type="math/tex">-2</script>：</p>
+<script type="math/tex; mode=display">A=\begin{bmatrix}2&2&3\\4&7&7\\-2&4&5\end{bmatrix}.</script>
+<ol>
+<li><script type="math/tex">r_2\leftarrow r_2-2r_1</script>，得到第二行 <script type="math/tex">(0,3,1)</script>。</li>
+<li><script type="math/tex">r_3\leftarrow r_3+r_1</script>，得到第三行 <script type="math/tex">(0,6,8)</script>。</li>
+<li><script type="math/tex">r_3\leftarrow r_3-2r_2</script>，得到第三行 <script type="math/tex">(0,0,6)</script>。</li>
+</ol>
+<p>于是</p>
+<script type="math/tex; mode=display">L=\begin{bmatrix}1&0&0\\2&1&0\\-1&2&1\end{bmatrix},\qquad
+U=\begin{bmatrix}2&2&3\\0&3&1\\0&0&6\end{bmatrix},\qquad A=LU.</script>
+<div class="note warning"><p><strong>别把消元矩阵当成 L。</strong> 本例的总消元矩阵是 <script type="math/tex">E=L^{-1}</script>，即 <script type="math/tex">E=\begin{bmatrix}1&0&0\\-2&1&0\\5&-2&1\end{bmatrix}</script>，满足 <script type="math/tex">EA=U</script>。检查时既可以算 <script type="math/tex">LU=A</script>，也可以算 <script type="math/tex">EA=U</script>，但两个等式不能混用。</p>
+</div>
+<h3 id="3-3-什么时候需要换行"><a href="#3-3-什么时候需要换行" class="headerlink" title="3.3 什么时候需要换行"></a>3.3 什么时候需要换行</h3><p>对于非奇异方阵，存在对角为 1 的 <script type="math/tex">L</script> 和非奇异上三角 <script type="math/tex">U</script> 的无置换 LU，当且仅当所有顺序主子式非零。</p>
+<p>例如 <script type="math/tex">\begin{bmatrix}0&1\\1&0\end{bmatrix}</script> 虽然可逆，却不能直接用左上角的 0 作主元；交换两行后才能按通常流程消元。引入置换矩阵 <script type="math/tex">P</script>，便写成 <script type="math/tex">PA=LU</script>。</p>
+<p>实际解 <script type="math/tex">Ax=b</script> 时，先解 <script type="math/tex">Ly=b</script>，再解 <script type="math/tex">Ux=y</script>；带置换时第一步改为 <script type="math/tex">Ly=Pb</script>。固定 <script type="math/tex">A</script>、更换很多个右端 <script type="math/tex">b</script> 时，一次分解就能反复使用。</p>
+<h2 id="4-LDV：将对角缩放单独拿出来"><a href="#4-LDV：将对角缩放单独拿出来" class="headerlink" title="4. LDV：将对角缩放单独拿出来"></a>4. LDV：将对角缩放单独拿出来</h2><h3 id="4-1-从-LU-再走一步"><a href="#4-1-从-LU-再走一步" class="headerlink" title="4.1 从 LU 再走一步"></a>4.1 从 LU 再走一步</h3><p>若 <script type="math/tex">U</script> 的对角元都非零，令</p>
+<script type="math/tex; mode=display">D=\operatorname{diag}(u_{11},\ldots,u_{nn}),\qquad V=D^{-1}U,</script>
+<p>那么 <script type="math/tex">V</script> 是单位上三角矩阵，得到 <script type="math/tex">A=LDV</script>。有些教材写作 LDU；这里沿用原笔记的 LDV，避免与 LU 中的普通上三角矩阵 <script type="math/tex">U</script> 混淆。</p>
+<p>对前面的例题，</p>
+<script type="math/tex; mode=display">D=\operatorname{diag}(2,3,6),\qquad
+V=\begin{bmatrix}1&1&3/2\\0&1&1/3\\0&0&1\end{bmatrix},\qquad A=LDV.</script>
+<p>可以这样记：<strong>L 是下三角恢复，D 是对角缩放，V 是单位上三角部分。</strong></p>
+<h3 id="4-2-顺序主子式公式与奇异边界"><a href="#4-2-顺序主子式公式与奇异边界" class="headerlink" title="4.2 顺序主子式公式与奇异边界"></a>4.2 顺序主子式公式与奇异边界</h3><p>记左上角 <script type="math/tex">k\times k</script> 子矩阵的行列式为 <script type="math/tex">\Delta_k</script>，约定 <script type="math/tex">\Delta_0=1</script>。当</p>
+<script type="math/tex; mode=display">\Delta_1,\ldots,\Delta_{n-1}\ne0,</script>
+<p>时可以构造 LDV，且</p>
+<script type="math/tex; mode=display">d_k=\frac{\Delta_k}{\Delta_{k-1}},\qquad k=1,\ldots,n.</script>
+<p><strong>最后一个 <script type="math/tex">\Delta_n</script> 可以为 0。</strong> 此时 <script type="math/tex">d_n=0</script>，不能写 <script type="math/tex">D^{-1}U</script>，但前 <script type="math/tex">n-1</script> 行仍可正常归一化，最后一行取单位上三角要求的形式即可。本例 <script type="math/tex">\Delta_1=2</script>、<script type="math/tex">\Delta_2=6</script>、<script type="math/tex">\Delta_3=36</script>，所以对角元确实为 <script type="math/tex">2,3,6</script>。</p>
+<details class="folding-tag" cyan=""><summary> 补充：这组条件与唯一性怎么理解？ </summary>
+              <div class="content">
+              <p>上述前 <script type="math/tex">n-1</script> 阶顺序主子式非零的条件，即使 <script type="math/tex">\Delta_n=0</script>，也能保证这套单位三角规范下分解唯一。理由是前面的非零主元逐步唯一确定所有需要的消元乘子和上三角行，最后的零主元不再被用于消去下面的元素。</p><p>但这不是“任意奇异矩阵存在 LDV”的必要条件。例如零矩阵就可取 <script type="math/tex">D=0</script>，它并不满足这些非零条件，而且 <script type="math/tex">L,V</script> 可以有多种选择。应把“这一组条件保证存在且唯一”和“所有可能存在的情形”区分开。</p>
+              </div>
+            </details>
+<h2 id="5-满秩分解：基向量乘以坐标"><a href="#5-满秩分解：基向量乘以坐标" class="headerlink" title="5. 满秩分解：基向量乘以坐标"></a>5. 满秩分解：基向量乘以坐标</h2><p>对秩为 <script type="math/tex">r>0</script> 的矩阵 <script type="math/tex">A\in\mathbb C^{m\times n}</script>，可以写成</p>
+<script type="math/tex; mode=display">A=BC,\qquad B\in\mathbb C^{m\times r},\quad C\in\mathbb C^{r\times n}.</script>
+<p><script type="math/tex">B</script> 满列秩，<script type="math/tex">C</script> 满行秩。它描述的是</p>
+<script type="math/tex; mode=display">\mathbb C^n\xrightarrow{\ C\ }\mathbb C^r\xrightarrow{\ B\ }\mathbb C^m.</script>
+<p>先把输入提炼为 <script type="math/tex">r</script> 个坐标，再由 <script type="math/tex">r</script> 个独立方向还原输出。零矩阵的情形可直接单独处理，不必纠结空矩阵的记号。</p>
+<h3 id="5-1-最稳妥的构造办法"><a href="#5-1-最稳妥的构造办法" class="headerlink" title="5.1 最稳妥的构造办法"></a>5.1 最稳妥的构造办法</h3><ol>
+<li>将 <script type="math/tex">A</script> 行化简，找出主元所在的<strong>列号</strong>。</li>
+<li>按这些列号，从<strong>原矩阵 A</strong> 中取列，组成 <script type="math/tex">B</script>。</li>
+<li>用 <script type="math/tex">B</script> 的列表示 <script type="math/tex">A</script> 的每一列，系数组成 <script type="math/tex">C</script>。若已经求出行最简形，其前 <script type="math/tex">r</script> 行就是对应的 <script type="math/tex">C</script>。</li>
+</ol>
+<p>原稿例子为</p>
+<script type="math/tex; mode=display">A=\begin{bmatrix}1&1&2\\0&2&2\\1&0&1\end{bmatrix}
+=\underbrace{\begin{bmatrix}1&1\\0&2\\1&0\end{bmatrix}}_{B}
+\underbrace{\begin{bmatrix}1&0&1\\0&1&1\end{bmatrix}}_{C}.</script>
+<p>第三列恰好等于前两列相加，所以 <script type="math/tex">C</script> 的第三列是 <script type="math/tex">(1,1)^T</script>。</p>
+<div class="note warning"><p>行变换通常会改变列空间。<strong>用化简结果找主元列号，但回到原矩阵取 B 的列。</strong> 若只化为普通阶梯形，还不能直接把它的非零行当成 <script type="math/tex">C</script>；要继续化为行最简形，或另解坐标。</p>
+</div>
+<h3 id="5-2-为什么列空间与零空间不变"><a href="#5-2-为什么列空间与零空间不变" class="headerlink" title="5.2 为什么列空间与零空间不变"></a>5.2 为什么列空间与零空间不变</h3><script type="math/tex; mode=display">\mathcal R(A)=\mathcal R(B),\qquad \mathcal N(A)=\mathcal N(C).</script>
+<p>前一个等式中，<script type="math/tex">A=BC</script> 保证 <script type="math/tex">A</script> 的每一列都在 <script type="math/tex">B</script> 的列空间里，且二者维数同为 <script type="math/tex">r</script>。后一个等式的关键是：<script type="math/tex">B</script> 满列秩，所以 <script type="math/tex">By=0</script> 只能有 <script type="math/tex">y=0</script>。于是</p>
+<script type="math/tex; mode=display">Ax=0\iff B(Cx)=0\iff Cx=0.</script>
+<p>满秩分解一般不唯一：对任意可逆的 <script type="math/tex">r\times r</script> 矩阵 <script type="math/tex">M</script>，也有 <script type="math/tex">A=(BM)(M^{-1}C)</script>。这相当于给中间坐标空间换了一组基。</p>
+<h2 id="6-普通谱分解：沿特征子空间拆开"><a href="#6-普通谱分解：沿特征子空间拆开" class="headerlink" title="6. 普通谱分解：沿特征子空间拆开"></a>6. 普通谱分解：沿特征子空间拆开</h2><h3 id="6-1-先有可对角化，才有这里的表达式"><a href="#6-1-先有可对角化，才有这里的表达式" class="headerlink" title="6.1 先有可对角化，才有这里的表达式"></a>6.1 先有可对角化，才有这里的表达式</h3><p>若 <script type="math/tex">A\in\mathbb C^{n\times n}</script> 有一组特征向量基，将它们排成可逆矩阵 <script type="math/tex">S</script>，就有</p>
+<script type="math/tex; mode=display">A=S\Lambda S^{-1}.</script>
+<p>按不同特征值 <script type="math/tex">\lambda_1,\ldots,\lambda_s</script> 分组，还能写成</p>
+<script type="math/tex; mode=display">A=\sum_{i=1}^{s}\lambda_iP_i,\qquad
+P_i^2=P_i,\quad P_iP_j=0\ (i\ne j),\quad \sum_{i=1}^{s}P_i=I.</script>
+<p><script type="math/tex">P_i</script> 把向量投到第 <script type="math/tex">i</script> 个特征子空间上，再由 <script type="math/tex">\lambda_i</script> 缩放。一般情况下这些是<strong>斜投影</strong>，未必满足 <script type="math/tex">P_i^H=P_i</script>；这里 <script type="math/tex">P_iP_j=0</script> 不代表对应子空间在欧氏内积下正交。</p>
+<h3 id="6-2-原稿例子：可对角化，但不是-Hermite"><a href="#6-2-原稿例子：可对角化，但不是-Hermite" class="headerlink" title="6.2 原稿例子：可对角化，但不是 Hermite"></a>6.2 原稿例子：可对角化，但不是 Hermite</h3><script type="math/tex; mode=display">A=\begin{bmatrix}1&1\\0&2\end{bmatrix},\qquad
+S=\begin{bmatrix}1&1\\0&1\end{bmatrix},\quad
+\Lambda=\begin{bmatrix}1&0\\0&2\end{bmatrix},\quad
+S^{-1}=\begin{bmatrix}1&-1\\0&1\end{bmatrix}.</script>
+<p>特征值 1、2 对应特征向量分别可取 <script type="math/tex">(1,0)^T</script>、<script type="math/tex">(1,1)^T</script>。它们线性无关，却不正交。令</p>
+<script type="math/tex; mode=display">P_1=\begin{bmatrix}1&-1\\0&0\end{bmatrix},\qquad
+P_2=\begin{bmatrix}0&1\\0&1\end{bmatrix},</script>
+<p>就有 <script type="math/tex">P_1+P_2=I</script>、<script type="math/tex">P_1P_2=P_2P_1=0</script>，并且 <script type="math/tex">A=P_1+2P_2</script>。</p>
+<details class="folding-tag" blue=""><summary> 计算 P_i 的两种方式 </summary>
+              <div class="content">
+              <p>第一种：在 <script type="math/tex">\Lambda</script> 中只保留对应特征值组的位置，用对角矩阵 <script type="math/tex">D_i</script> 标记这些位置，则 <script type="math/tex">P_i=SD_iS^{-1}</script>。</p><p>第二种：对可对角化矩阵，以不同特征值为节点作插值，得到</p><script type="math/tex; mode=display">P_i=\prod_{j\ne i}\frac{A-\lambda_jI}{\lambda_i-\lambda_j}.</script><p>本例 <script type="math/tex">P_1=2I-A</script>、<script type="math/tex">P_2=A-I</script>，不必先显式计算 <script type="math/tex">S</script>。由这些投影还可得到 <script type="math/tex">A^k=\sum_i\lambda_i^kP_i</script>，适合求矩阵的整数幂。</p>
+              </div>
+            </details>
+<div class="note warning"><p>不是每个方阵都能对角化。例如 <script type="math/tex">\begin{bmatrix}1&1\\0&1\end{bmatrix}</script> 只有一个独立特征向量，不能套用本节的纯投影求和式；可改用 Jordan 形式，或采用后面的 Schur 分解。</p>
+</div>
+<h2 id="7-Hermite-谱分解：特征方向还能彼此正交"><a href="#7-Hermite-谱分解：特征方向还能彼此正交" class="headerlink" title="7. Hermite 谱分解：特征方向还能彼此正交"></a>7. Hermite 谱分解：特征方向还能彼此正交</h2><p>对 Hermite 矩阵 <script type="math/tex">A^H=A</script>，特征值全为实数，且能选出一组标准正交特征向量：</p>
+<script type="math/tex; mode=display">A=U\Lambda U^H,\qquad U^HU=I.</script>
+<p>因为 <script type="math/tex">U^{-1}=U^H</script>，换基不会扭曲长度和夹角。若按不同特征值分组，相应投影还满足 <script type="math/tex">P_i^H=P_i</script>，是真正的正交投影。</p>
+<h3 id="7-1-原稿对称矩阵例子"><a href="#7-1-原稿对称矩阵例子" class="headerlink" title="7.1 原稿对称矩阵例子"></a>7.1 原稿对称矩阵例子</h3><script type="math/tex; mode=display">A=\begin{bmatrix}2&1\\1&2\end{bmatrix}.</script>
+<p>先解 <script type="math/tex">\det(A-\lambda I)=(2-\lambda)^2-1=0</script>，得到 <script type="math/tex">\lambda_1=3</script>、<script type="math/tex">\lambda_2=1</script>。对应单位特征向量为</p>
+<script type="math/tex; mode=display">u_1=\frac1{\sqrt2}\begin{bmatrix}1\\1\end{bmatrix},\qquad
+u_2=\frac1{\sqrt2}\begin{bmatrix}1\\-1\end{bmatrix}.</script>
+<p>于是</p>
+<script type="math/tex; mode=display">U=\frac1{\sqrt2}\begin{bmatrix}1&1\\1&-1\end{bmatrix},\qquad
+A=U\begin{bmatrix}3&0\\0&1\end{bmatrix}U^T
+=3u_1u_1^T+u_2u_2^T.</script>
+<p>几何上，沿 <script type="math/tex">(1,1)^T</script> 方向伸长 3 倍，沿 <script type="math/tex">(1,-1)^T</script> 方向保持不变。若特征值为负，相应方向还会反向；所以一般 Hermite 变换不一定只是正向拉伸。</p>
+<div class="note info"><p><strong>普通谱与 Hermite 谱的区别</strong>：普通情形的特征向量只要求线性无关，使用 <script type="math/tex">S^{-1}</script>；Hermite 情形可以选标准正交基，使用 <script type="math/tex">U^H</script>。更一般地，复方阵能酉对角化当且仅当它是正规矩阵；Hermite 额外保证对角元全为实数。</p>
+</div>
+<h2 id="8-QR-UR：将一组独立列变成正交基"><a href="#8-QR-UR：将一组独立列变成正交基" class="headerlink" title="8. QR / UR：将一组独立列变成正交基"></a>8. QR / UR：将一组独立列变成正交基</h2><h3 id="8-1-精简-QR-的尺寸"><a href="#8-1-精简-QR-的尺寸" class="headerlink" title="8.1 精简 QR 的尺寸"></a>8.1 精简 QR 的尺寸</h3><p>对满列秩矩阵 <script type="math/tex">A\in\mathbb C^{m\times n}</script>，其中 <script type="math/tex">m\ge n</script>，精简 QR 为</p>
+<script type="math/tex; mode=display">A=QR,\qquad Q\in\mathbb C^{m\times n},\quad Q^HQ=I_n,\quad
+R\in\mathbb C^{n\times n}.</script>
+<p><script type="math/tex">R</script> 是上三角矩阵。若要求其对角元为正实数，则这种 QR 唯一。方阵情形 <script type="math/tex">Q</script> 是酉矩阵，有些教材写作 <script type="math/tex">A=UR</script>。一般矩阵也有完整 QR，但秩亏时 <script type="math/tex">R</script> 会出现零对角元，不能直接照搬下面“每一步都除以非零长度”的算法。</p>
+<h3 id="8-2-用-Gram–Schmidt-理解它"><a href="#8-2-用-Gram–Schmidt-理解它" class="headerlink" title="8.2 用 Gram–Schmidt 理解它"></a>8.2 用 Gram–Schmidt 理解它</h3><p>设 <script type="math/tex">A=[a_1,\ldots,a_n]</script>，依次计算</p>
+<script type="math/tex; mode=display">z_j=a_j-\sum_{i=1}^{j-1}q_i(q_i^Ha_j),\qquad
+q_j=\frac{z_j}{\|z_j\|_2}.</script>
+<p>每次先减去已知方向上的投影，再归一化。得到 <script type="math/tex">Q=[q_1,\ldots,q_n]</script> 后，</p>
+<script type="math/tex; mode=display">R=Q^HA,\qquad r_{ij}=q_i^Ha_j\ (i\le j),\quad r_{ij}=0\ (i>j).</script>
+<p>所以 QR 可以看作：<strong>满秩分解中，特别把 B 选成一组标准正交基。</strong></p>
+<details class="folding-tag" green=""><summary> 手算一个 3×2 的 QR 例子 </summary>
+              <div class="content">
+              <p>取</p><script type="math/tex; mode=display">A=\begin{bmatrix}1&1\\1&0\\0&1\end{bmatrix},\quad
+a_1=\begin{bmatrix}1\\1\\0\end{bmatrix},\quad
+a_2=\begin{bmatrix}1\\0\\1\end{bmatrix}.</script><p>有 <script type="math/tex">q_1=(1,1,0)^T/\sqrt2</script>、<script type="math/tex">q_1^Ta_2=1/\sqrt2</script>，因此</p><script type="math/tex; mode=display">z_2=\begin{bmatrix}1/2\\-1/2\\1\end{bmatrix},\qquad
+q_2=\frac1{\sqrt6}\begin{bmatrix}1\\-1\\2\end{bmatrix}.</script><p>最终</p><script type="math/tex; mode=display">Q=\begin{bmatrix}1/\sqrt2&1/\sqrt6\\1/\sqrt2&-1/\sqrt6\\0&2/\sqrt6\end{bmatrix},\quad
+R=\begin{bmatrix}\sqrt2&1/\sqrt2\\0&\sqrt6/2\end{bmatrix}.</script><p>可以分别检查 <script type="math/tex">Q^TQ=I_2</script> 和 <script type="math/tex">QR=A</script>。此时 <script type="math/tex">QQ^T</script> 是投到 <script type="math/tex">A</script> 列空间的正交投影，并不是 <script type="math/tex">I_3</script>。</p>
+              </div>
+            </details>
+<p>最小二乘问题 <script type="math/tex">\min_x\|Ax-b\|_2</script> 在满列秩时可化为上三角方程 <script type="math/tex">Rx=Q^Hb</script>。理解算法时用 Gram–Schmidt 很直观；实际浮点计算常用 Householder 变换，或改进 Gram–Schmidt，以减少正交性损失。</p>
+<h2 id="9-Schur：不能对角化，也能酉上三角化"><a href="#9-Schur：不能对角化，也能酉上三角化" class="headerlink" title="9. Schur：不能对角化，也能酉上三角化"></a>9. Schur：不能对角化，也能酉上三角化</h2><h3 id="9-1-结论与谱分解的关系"><a href="#9-1-结论与谱分解的关系" class="headerlink" title="9.1 结论与谱分解的关系"></a>9.1 结论与谱分解的关系</h3><p>任意复方阵都存在</p>
+<script type="math/tex; mode=display">A=UTU^H,\qquad U^HU=I,\quad T\text{ 为上三角矩阵}.</script>
+<p><script type="math/tex">T</script> 的对角元就是 <script type="math/tex">A</script> 的特征值。若 <script type="math/tex">A</script> 正规，可以让 <script type="math/tex">T</script> 进一步成为对角矩阵；一般矩阵则保留对角线以上的耦合项。</p>
+<p>对实矩阵，如果要求 <script type="math/tex">U,T</script> 都是实数，通常得到<strong>实 Schur 形式</strong>：<script type="math/tex">T</script> 为上准三角，由 <script type="math/tex">1\times1</script> 和 <script type="math/tex">2\times2</script> 对角块组成。存在非实特征值时，不能保证实上三角形式。</p>
+<details class="folding-tag" cyan=""><summary> 原稿思路：从 Jordan 与 QR 推出 Schur </summary>
+              <div class="content">
+              <p>在复数域，取 <script type="math/tex">A=SJS^{-1}</script>，将可逆矩阵 <script type="math/tex">S</script> 做 QR，写成 <script type="math/tex">S=UR</script>。于是</p><script type="math/tex; mode=display">A=U(RJR^{-1})U^H.</script><p><script type="math/tex">J</script>、<script type="math/tex">R</script>、<script type="math/tex">R^{-1}</script> 均为上三角，所以 <script type="math/tex">T=RJR^{-1}</script> 也是上三角。这证明了存在性；数值计算中通常不会先求 Jordan 形再做这一步。</p>
+              </div>
+            </details>
+<h3 id="9-2-为什么说它保留了一条不变子空间链"><a href="#9-2-为什么说它保留了一条不变子空间链" class="headerlink" title="9.2 为什么说它保留了一条不变子空间链"></a>9.2 为什么说它保留了一条不变子空间链</h3><p>写 <script type="math/tex">U=[u_1,\ldots,u_n]</script>，令 <script type="math/tex">W_k=\operatorname{span}(u_1,\ldots,u_k)</script>。由 <script type="math/tex">AU=UT</script> 与上三角结构可知</p>
+<script type="math/tex; mode=display">Au_j\in\operatorname{span}(u_1,\ldots,u_j),\qquad A(W_k)\subseteq W_k.</script>
+<p>所以有 <script type="math/tex">\{0\}\subset W_1\subset\cdots\subset W_n=\mathbb C^n</script>。这里是“前 <script type="math/tex">k</script> 个向量共同张成的空间不变”，并非“每个 <script type="math/tex">u_j</script> 都是特征向量”。</p>
+<p>原笔记例子中，取</p>
+<script type="math/tex; mode=display">U=\begin{bmatrix}1/\sqrt2&0&1/\sqrt2\\1/\sqrt2&0&-1/\sqrt2\\0&1&0\end{bmatrix},\qquad
+T=\begin{bmatrix}1&\sqrt2&0\\0&2&\sqrt2\\0&0&3\end{bmatrix}.</script>
+<p>相乘可得</p>
+<script type="math/tex; mode=display">A=UTU^T=\begin{bmatrix}2&-1&1\\-1&2&1\\1&-1&2\end{bmatrix}.</script>
+<p>这时 <script type="math/tex">Au_1=u_1</script>，但 <script type="math/tex">Au_2=\sqrt2u_1+2u_2</script>，<script type="math/tex">Au_3=\sqrt2u_2+3u_3</script>。第二、第三个方向会混入前面的方向，整体仍留在相应的 <script type="math/tex">W_k</script> 中。这正是上三角形的几何含义。</p>
+<h2 id="10-SVD：让输入与输出各用一套正交基"><a href="#10-SVD：让输入与输出各用一套正交基" class="headerlink" title="10. SVD：让输入与输出各用一套正交基"></a>10. SVD：让输入与输出各用一套正交基</h2><h3 id="10-1-不要求方阵，也不要求可对角化"><a href="#10-1-不要求方阵，也不要求可对角化" class="headerlink" title="10.1 不要求方阵，也不要求可对角化"></a>10.1 不要求方阵，也不要求可对角化</h3><p>任意 <script type="math/tex">A\in\mathbb C^{m\times n}</script> 都存在完整 SVD：</p>
+<script type="math/tex; mode=display">A=U\Sigma V^H,\qquad
+U\in\mathbb C^{m\times m},\quad V\in\mathbb C^{n\times n},\quad
+\Sigma\in\mathbb R^{m\times n}.</script>
+<p><script type="math/tex">U,V</script> 为酉矩阵，<script type="math/tex">\Sigma</script> 的对角元为非负奇异值，通常按 <script type="math/tex">\sigma_1\ge\cdots\ge\sigma_r>0</script> 排列，其余为 0。这里的矩形“对角矩阵”允许行数与列数不同。</p>
+<p><strong>与谱分解对照</strong>：谱分解用同一组空间基描述输入和输出；SVD 在输入空间选 <script type="math/tex">v_i</script>，在输出空间选 <script type="math/tex">u_i</script>，二者由</p>
+<script type="math/tex; mode=display">Av_i=\sigma_i u_i\quad (i=1,\ldots,r)</script>
+<p>连接。它的作用顺序是：<script type="math/tex">V^H</script> 读取输入坐标，<script type="math/tex">\Sigma</script> 缩放或压到零，再由 <script type="math/tex">U</script> 转到输出方向。</p>
+<h3 id="10-2-手算-SVD-的五步"><a href="#10-2-手算-SVD-的五步" class="headerlink" title="10.2 手算 SVD 的五步"></a>10.2 手算 SVD 的五步</h3><ol>
+<li>求 <script type="math/tex">A^HA</script>，它是 Hermite 半正定矩阵。</li>
+<li>求其特征值，按从大到小排序。非零特征值满足 <script type="math/tex">\lambda_i>0</script>，奇异值为 <script type="math/tex">\sigma_i=\sqrt{\lambda_i}</script>。</li>
+<li>在每个特征子空间选标准正交基，得到右奇异向量 <script type="math/tex">v_i</script>，组成 <script type="math/tex">V</script>。</li>
+<li><strong>仅对正奇异值</strong>，计算 <script type="math/tex">u_i=Av_i/\sigma_i</script>。</li>
+<li>将这些 <script type="math/tex">u_i</script> 补成 <script type="math/tex">\mathbb C^m</script> 的标准正交基，组成完整的 <script type="math/tex">U</script>，再按尺寸填出 <script type="math/tex">\Sigma</script>。</li>
+</ol>
+<div class="note warning"><p><strong>零奇异值不能拿来作除数。</strong> 此时对应 <script type="math/tex">v_i</script> 属于 <script type="math/tex">\mathcal N(A)</script>；左侧需要补齐的向量可从 <script type="math/tex">\mathcal N(A^H)</script> 中选。重特征值对应的向量也要正交化，不能随便取几个互不正交的特征向量就拼成 <script type="math/tex">V</script>。</p>
+</div>
+<h3 id="10-3-一个有零奇异值的长方阵"><a href="#10-3-一个有零奇异值的长方阵" class="headerlink" title="10.3 一个有零奇异值的长方阵"></a>10.3 一个有零奇异值的长方阵</h3><p>取</p>
+<script type="math/tex; mode=display">A=\begin{bmatrix}3&0&0\\0&0&0\end{bmatrix},\qquad
+A^TA=\operatorname{diag}(9,0,0).</script>
+<p>可直接选择 <script type="math/tex">U=I_2</script>、<script type="math/tex">V=I_3</script>、<script type="math/tex">\Sigma=A</script>。它只有一个正奇异值 <script type="math/tex">\sigma_1=3</script>：输入第一轴被放大 3 倍，另外两个输入方向都被压成零。两边的单位矩阵尺寸不同，正好提醒我们输入和输出不必处于同一个空间。</p>
+<h3 id="10-4-用同一个例子对比谱分解与-SVD"><a href="#10-4-用同一个例子对比谱分解与-SVD" class="headerlink" title="10.4 用同一个例子对比谱分解与 SVD"></a>10.4 用同一个例子对比谱分解与 SVD</h3><p>第 7 节的实对称矩阵 <script type="math/tex">A=\begin{bmatrix}2&1\\1&2\end{bmatrix}</script> 为正定矩阵，因此可以取相同的左右奇异向量，奇异值恰为 3、1。一般 Hermite 矩阵有负特征值时，奇异值取特征值的绝对值，符号由左右向量配合承担；一般非正规矩阵的奇异值更不能直接从特征值取绝对值得到。</p>
+<h3 id="10-5-四个基本子空间与低秩近似"><a href="#10-5-四个基本子空间与低秩近似" class="headerlink" title="10.5 四个基本子空间与低秩近似"></a>10.5 四个基本子空间与低秩近似</h3><p>SVD 给出两个正交直和：</p>
+<script type="math/tex; mode=display">\mathbb C^n=\mathcal R(A^H)\oplus\mathcal N(A),\qquad
+\mathbb C^m=\mathcal R(A)\oplus\mathcal N(A^H).</script>
+<p>前 <script type="math/tex">r</script> 个 <script type="math/tex">v_i</script> 张成 <script type="math/tex">\mathcal R(A^H)</script>，剩余右奇异向量张成 <script type="math/tex">\mathcal N(A)</script>；前 <script type="math/tex">r</script> 个 <script type="math/tex">u_i</script> 张成 <script type="math/tex">\mathcal R(A)</script>，其余张成 <script type="math/tex">\mathcal N(A^H)</script>。</p>
+<p>将矩阵展开为秩一项：</p>
+<script type="math/tex; mode=display">A=\sum_{i=1}^{r}\sigma_i u_iv_i^H.</script>
+<p>只保留前 <script type="math/tex">k<r</script> 项，得到 <script type="math/tex">A_k=\sum_{i=1}^{k}\sigma_i u_iv_i^H</script>。它在谱范数与 Frobenius 范数下都是最佳的秩不超过 <script type="math/tex">k</script> 的近似，并满足</p>
+<script type="math/tex; mode=display">\|A-A_k\|_2=\sigma_{k+1},\qquad
+\|A-A_k\|_F=\sqrt{\sum_{i=k+1}^{r}\sigma_i^2}.</script>
+<p>这也是图像低秩压缩的出发点：保留贡献较大的结构，舍去较小的项。分解本身不会自动判断哪些细节对人最重要，截断会损失信息。</p>
+<h2 id="11-极分解：分开旋转与伸缩"><a href="#11-极分解：分开旋转与伸缩" class="headerlink" title="11. 极分解：分开旋转与伸缩"></a>11. 极分解：分开旋转与伸缩</h2><h3 id="11-1-沿用原笔记的左极分解-A-PQ"><a href="#11-1-沿用原笔记的左极分解-A-PQ" class="headerlink" title="11.1 沿用原笔记的左极分解 A=PQ"></a>11.1 沿用原笔记的左极分解 A=PQ</h3><p>对任意复方阵，可写成</p>
+<script type="math/tex; mode=display">A=PQ,\qquad P=(AA^H)^{1/2},\qquad Q^HQ=I,</script>
+<p>其中 <script type="math/tex">P</script> 为 Hermite 半正定矩阵。几何上先由 <script type="math/tex">Q</script> 保持长度地旋转或反射（复数情形为酉变换），再由 <script type="math/tex">P</script> 沿一组正交方向做非负伸缩；有零特征值时会压扁某些方向。</p>
+<p>由方阵 SVD <script type="math/tex">A=U\Sigma V^H</script>，直接构造</p>
+<script type="math/tex; mode=display">P=U\Sigma U^H,\qquad Q=UV^H,\qquad
+PQ=U\Sigma V^H=A.</script>
+<p>也可写右极分解 <script type="math/tex">A=QH</script>，其中 <script type="math/tex">H=(A^HA)^{1/2}=V\Sigma V^H</script>。<strong>先检查采用的是左式还是右式，不要把两个半正定因子混在一起。</strong></p>
+<h3 id="11-2-唯一性与一个具体例子"><a href="#11-2-唯一性与一个具体例子" class="headerlink" title="11.2 唯一性与一个具体例子"></a>11.2 唯一性与一个具体例子</h3><p><script type="math/tex">P</script> 始终唯一；<script type="math/tex">A</script> 可逆时，<script type="math/tex">Q=P^{-1}A</script> 也唯一。若 <script type="math/tex">A</script> 奇异，<script type="math/tex">Q</script> 在零空间所涉及的剩余方向上可以有不同的酉延拓，因此一般不唯一。</p>
+<p>例如</p>
+<script type="math/tex; mode=display">A=\begin{bmatrix}0&-2\\1&0\end{bmatrix}
+=\underbrace{\begin{bmatrix}2&0\\0&1\end{bmatrix}}_{P}
+\underbrace{\begin{bmatrix}0&-1\\1&0\end{bmatrix}}_{Q}.</script>
+<p><script type="math/tex">Q</script> 先将平面逆时针旋转 <script type="math/tex">90^\circ</script>，<script type="math/tex">P</script> 再将水平方向放大 2 倍。若改用右极分解，则 <script type="math/tex">H=\operatorname{diag}(1,2)</script>，伸缩发生在旋转之前。</p>
+<details class="folding-tag" yellow=""><summary> 为什么奇异时 Q 可能不唯一？ </summary>
+              <div class="content">
+              <p>取 <script type="math/tex">A=\operatorname{diag}(1,0)</script>，则 <script type="math/tex">P=\operatorname{diag}(1,0)</script>。无论选 <script type="math/tex">Q=\operatorname{diag}(1,1)</script> 还是 <script type="math/tex">Q=\operatorname{diag}(1,-1)</script>，都有 <script type="math/tex">PQ=A</script>，且 <script type="math/tex">Q</script> 正交。第二个方向最终被 <script type="math/tex">P</script> 压成零，先在这个方向反射与否都不影响输出。</p>
+              </div>
+            </details>
+<h2 id="12-把九种分解连起来"><a href="#12-把九种分解连起来" class="headerlink" title="12. 把九种分解连起来"></a>12. 把九种分解连起来</h2><div class="note success"><p><strong>一条复习主线</strong>：消元得到 LU，再拆对角元得到 LDV；选列空间基得到满秩分解，把基正交化得到 QR；按特征子空间拆得到谱分解，Hermite 时可以正交地拆；一般复方阵至少能 Schur 上三角化；输入输出分别选正交基得到 SVD，再将 SVD 的两部分合并得到极分解。</p>
+</div>
+<p>遇到题目时，先问自己：</p>
+<div class="table-container">
+<div class="matrix-study-table"><table>
+<thead>
+<tr>
+<th>题目目标</th>
+<th>优先想到</th>
+<th>验证什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同一个系数矩阵反复解方程</td>
+<td>LU / 带置换 LU</td>
+<td>是否需要换行，是否有零主元</td>
+</tr>
+<tr>
+<td>分清消元与对角缩放</td>
+<td>LDV</td>
+<td>顺序主子式、单位三角规范</td>
+</tr>
+<tr>
+<td>找列空间的一组基</td>
+<td>满秩分解</td>
+<td>从原矩阵取基，乘积是否还原</td>
+</tr>
+<tr>
+<td>求矩阵幂、理解特征方向</td>
+<td>普通谱分解</td>
+<td>是否有足够多的独立特征向量</td>
+</tr>
+<tr>
+<td>对称 / Hermite 结构</td>
+<td>Hermite 谱分解</td>
+<td>特征值为实、基标准正交</td>
+</tr>
+<tr>
+<td>正交化、满列秩最小二乘</td>
+<td>QR</td>
+<td>精简 Q 的尺寸，R 是否可逆</td>
+</tr>
+<tr>
+<td>一般复方阵、保留正交基</td>
+<td>Schur</td>
+<td>T 上三角，基向量未必全是特征向量</td>
+</tr>
+<tr>
+<td>长方阵、秩、低秩逼近</td>
+<td>SVD</td>
+<td>非负奇异值，两侧维度，零值处理</td>
+</tr>
+<tr>
+<td>分离长度保持与伸缩</td>
+<td>极分解</td>
+<td>左右形式、半正定因子、唯一性</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<h2 id="13-合上笔记，自测六题"><a href="#13-合上笔记，自测六题" class="headerlink" title="13. 合上笔记，自测六题"></a>13. 合上笔记，自测六题</h2><p>先独立回答，再展开答案。能解释原因，比只背公式更有用。</p>
+<details class="folding-tag" blue=""><summary> 1. 可逆矩阵一定能不换行做 LU 吗？ </summary>
+              <div class="content">
+              <p>不一定。<script type="math/tex">\begin{bmatrix}0&1\\1&0\end{bmatrix}</script> 可逆，但第一个主元为 0。使用行置换后可写 <script type="math/tex">PA=LU</script>；对非奇异矩阵，无置换 LU 的判据是所有顺序主子式非零。</p>
+              </div>
+            </details>
+<details class="folding-tag" cyan=""><summary> 2. 满秩分解 A=BC 中，为什么 Ax=0 能推出 Cx=0？ </summary>
+              <div class="content">
+              <p>因为 <script type="math/tex">B</script> 满列秩，即 <script type="math/tex">By=0</script> 只有零解。把 <script type="math/tex">y=Cx</script> 代入，即得 <script type="math/tex">Cx=0</script>。只知道 <script type="math/tex">A=BC</script>、却没有 <script type="math/tex">B</script> 满列秩时，不能这样推理。</p>
+              </div>
+            </details>
+<details class="folding-tag" green=""><summary> 3. 可对角化是否意味着可以酉对角化？ </summary>
+              <div class="content">
+              <p>不意味着。第 6 节的 <script type="math/tex">\begin{bmatrix}1&1\\0&2\end{bmatrix}</script> 可对角化，但不是正规矩阵，不能酉对角化。复方阵可酉对角化的充要条件是正规；Hermite 是其中具有实特征值的重要情形。</p>
+              </div>
+            </details>
+<details class="folding-tag" blue=""><summary> 4. 精简 QR 中 Q^HQ=I，是否就有 QQ^H=I？ </summary>
+              <div class="content">
+              <p>若 <script type="math/tex">Q</script> 是方阵，则有；若 <script type="math/tex">Q</script> 是列数小于行数的长方阵，则通常没有。此时 <script type="math/tex">QQ^H</script> 是投到 <script type="math/tex">\mathcal R(Q)</script> 的正交投影。</p>
+              </div>
+            </details>
+<details class="folding-tag" cyan=""><summary> 5. SVD 中遇到 σ=0，还能用 u=Av/σ 吗？ </summary>
+              <div class="content">
+              <p>不能。正奇异值对应的左奇异向量才用这个公式计算；剩余左侧方向从 <script type="math/tex">\mathcal N(A^H)</script> 补齐。零奇异值对应的右侧方向属于 <script type="math/tex">\mathcal N(A)</script>。</p>
+              </div>
+            </details>
+<details class="folding-tag" green=""><summary> 6. 为什么奇异方阵的极分解中 P 唯一，Q 却可能不唯一？ </summary>
+              <div class="content">
+              <p><script type="math/tex">P</script> 由唯一的半正定平方根 <script type="math/tex">(AA^H)^{1/2}</script> 决定。奇异情形下，一些方向会被压成零，酉因子在剩余方向上的延拓可以不同，却产生相同的乘积。</p>
+              </div>
+            </details>
+<h2 id="14-整理说明与延伸阅读"><a href="#14-整理说明与延伸阅读" class="headerlink" title="14. 整理说明与延伸阅读"></a>14. 整理说明与延伸阅读</h2><p>原稿第 1 页 LU 示例第三行为 <script type="math/tex">(-2,4,5)</script>；总消元矩阵按 <script type="math/tex">L^{-1}</script> 解释。普通谱分解与 Hermite 谱分解的例子，按作者确认对调。Schur 例子的原矩阵存在涂改，本文用所给 <script type="math/tex">U,T</script> 相乘复核后展示一致的矩阵。</p>
+<p>速查表、QR 与极分解的补充算例、SVD 的零值处理和低秩近似误差、自测题，均为整理时补充的教学内容。手算时应始终将因子乘回去验证；数值计算还需要考虑舍入误差和稳定性。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://web.mit.edu/18.06/">MIT 18.06 线性代数课程</a>：用于继续系统学习消元、子空间和特征值。</li>
+<li><a target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/resources/lecture-2-multiplying-and-factoring-matrices/">MIT：Multiplying and Factoring Matrices</a>：对照 LU、QR 与 SVD 的共同思路。</li>
+<li><a target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/singular-value-decomposition/">MIT：Singular Value Decomposition</a>：补充观看 SVD 的讲解与练习。</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Badchen666</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://badchen666.github.io/2026/10/24/matrix-decompositions-guide/">https://badchen666.github.io/2026/10/24/matrix-decompositions-guide/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Badchen666</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                                    <span class="chip bg-color">线性代数</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/">
+                                    <span class="chip bg-color">矩阵分解</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">学习笔记</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .waline-card {
+        margin: 1.5rem auto;
+    }
+    .waline-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #waline p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #waline blockquote p {
+        text-indent: 0.2rem;
+    }
+    #waline a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+    #waline img {
+        max-width: 100%;
+        cursor: pointer;
+    }
+    #waline ol li {
+        list-style-type: decimal;
+    }
+    #waline ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+    #waline ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+    #waline ul li {
+        list-style-type: disc;
+    }
+    #waline ul ul li {
+        list-style-type: circle;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    #waline table, th, td {
+        border: 0;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+    #waline h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+    #waline h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+    #waline h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+    #waline h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+    #waline h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+    #waline p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+    #waline hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+    #waline blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+    #waline pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+    #waline code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+    #waline pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+    #waline pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+    #waline code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+    #waline b,
+    strong {
+        font-weight: bold;
+    }
+    #waline dfn {
+        font-style: italic;
+    }
+    #waline small {
+        font-size: 85%;
+    }
+    #waline cite {
+        font-style: normal;
+    }
+    #waline mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+  </style>
+  
+  <div class="card waline-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="waline" class="card-content" style="display: grid">
+    </div>
+  </div>
+  
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/@waline/client"></script> -->
+  <script src="/libs/waline/Waline.min.js"></script>
+  <script>
+    new Waline({
+        el: '#waline',
+        serverURL: 'https://badchen666.lavoisier7.xyz/',
+        avatar: 'mm'    
+    });
+  </script> 
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2026/10/24/matrix-decompositions-guide/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/posts/matrix-decompositions/cover.svg" class="responsive-img" alt="矩阵分解学习笔记：从 LU 到 SVD 的九种分解">
+                        
+                        <span class="card-title">矩阵分解学习笔记：从 LU 到 SVD 的九种分解</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            从四页手写笔记出发，串起 LU、LDV、满秩、普通谱、Hermite、QR、Schur、SVD 与极分解：适用条件、计算步骤、几何直觉和复习自测。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-10-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" class="post-category">
+                                    开发经验
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">
+                        <span class="chip bg-color">线性代数</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/">
+                        <span class="chip bg-color">矩阵分解</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2026/01/03/tcl-yu-yan-yu-fa-hui-zong-tuo-zhan-pian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="TCL语言语法汇总（拓展篇）">
+                        
+                        <span class="card-title">TCL语言语法汇总（拓展篇）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            学习TCL脚本语言时将相关语法以笔记的形式进行汇总
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2026-01-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    实用技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/TCL/">
+                        <span class="chip bg-color">TCL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2024-2026</span>
+            
+            <a href="/about" target="_blank">Badchen666</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">38k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2024";
+                        var startMonth = "11";
+                        var startDate = "28";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/badchen666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:209650350@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=209650350" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 209650350" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="30"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '2');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body>
+
+</html>

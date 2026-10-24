@@ -1,0 +1,31 @@
+/* Loaded only by the matrix decompositions article. */
+#articleContent { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.95; color: #273749; overflow-wrap: anywhere; }
+#articleContent h2 { margin-top: 2.6rem; padding: .65rem 1rem; border-left: 4px solid #168d88; border-radius: 0 8px 8px 0; background: linear-gradient(90deg,#edf7f5,transparent); font-size: 1.55rem; line-height: 1.5; }
+#articleContent h3 { margin-top: 1.8rem; font-size: 1.22rem; line-height: 1.6; }
+#articleContent p { margin: 1rem 0; }
+#articleContent .note { height: auto; overflow: visible; padding: 1rem 1.25rem 1rem 2.8rem; border-left: 4px solid #3995b0; border-radius: 8px; background: #eff7fb; margin: 1.5rem 0; }
+#articleContent .note::before { left: .65rem; top: 1rem; }
+#articleContent .note.warning { border-color: #d29a35; background: #fff8e9; }
+#articleContent .note.success { border-color: #168d88; background: #edf8f2; }
+#articleContent .note p:first-child { margin-top: 0; }
+#articleContent .note p:last-child { margin-bottom: 0; }
+#articleContent .matrix-study-table { overflow-x: auto; max-width: 100%; margin: 1.5rem 0; border: 1px solid #dfe7e9; border-radius: 8px; }
+#articleContent .table-container { overflow-x: auto; max-width: 100%; }
+#articleContent table { min-width: 570px; margin: 0; font-size: .94rem; }
+#articleContent th { background: #edf5f5; white-space: nowrap; }
+#articleContent th, #articleContent td { padding: .8rem 1rem; }
+#articleContent tr:nth-child(even) { background: #f7fafb; }
+#articleContent .MathJax_Display { overflow-x: auto; overflow-y: hidden; padding: .7rem .2rem; margin: 1.4rem 0; max-width: 100%; }
+#articleContent .MathJax { font-size: 1em; }
+#articleContent details.folding-tag { margin: 1.35rem 0; border-radius: 8px; }
+#articleContent details.folding-tag summary { line-height: 1.7; cursor: pointer; }
+#articleContent details.folding-tag .content { min-height: 0!important; height: auto; width: auto; margin: 0; padding: .6rem 1.2rem 1.2rem; }
+@media(max-width:600px) { #articleContent { font-size: 15px; line-height: 1.9; } #articleContent h2 { font-size: 1.3rem; padding: .6rem .75rem; } #articleContent .note { padding: .9rem 1rem .9rem 2.5rem; } #articleContent details.folding-tag .content { padding: .5rem .8rem 1rem; } }
+@media(prefers-reduced-motion:reduce) { #articleContent * { scroll-behavior: auto!important; } }
+body.DarkMode #articleContent { color: #dbe4ed; }
+body.DarkMode #articleContent h2 { background: linear-gradient(90deg,#1b4244,transparent); }
+body.DarkMode #articleContent .note { color: #dbe4ed; background: #213943; }
+body.DarkMode #articleContent .note.warning { background: #403622; }
+body.DarkMode #articleContent .note.success { background: #213e32; }
+body.DarkMode #articleContent th { background: #24393b; }
+body.DarkMode #articleContent tr:nth-child(even) { background: #29333a; }

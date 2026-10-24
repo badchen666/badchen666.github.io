@@ -1,0 +1,1965 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="TCL语言语法汇总（基础篇）, Badchenの赛博小窝">
+    <meta name="description" content="学习TCL脚本语言时将相关语法以笔记的形式进行汇总">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>TCL语言语法汇总（基础篇） | Badchenの赛博小窝</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <style>
+        body{
+            background-image: url(https://img.remit.ee/api/file/BQACAgUAAyEGAASHRsPbAAJHp2iDSHaU6f4Otc_rzGXGNWBXuLQyAAIUGgAC4hIYVC7RgHmrTTKGNgQ.jpg);
+            background-repeat:no-repeat;
+            background-size: 100% 100%;
+            background-attachment:fixed;
+        }
+    </style>
+
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Badchenの赛博小窝</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/archives">
+          
+          <i class="fas fa-archive" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>归档</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tags">
+          
+          <i class="fas fa-tags" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>标签</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/article" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-file" style="zoom: 0.6;"></i>
+      
+      <span>文章</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/">
+          
+          <i class="fas fa-gears" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>开发经验</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E6%B8%B8%E6%88%8F%E4%B9%8B%E6%97%85/">
+          
+          <i class="fas fa-gamepad" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>游戏心得</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/">
+          
+          <i class="fas fa-person-chalkboard" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>实用技巧</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/">
+          
+          <i class="fas fa-chart-simple" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>生活随想</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/project" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>项目</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/categories/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/">
+          
+          <i class="fas fa-computer" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>软件相关</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/">
+          
+          <i class="fas fa-link" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>嵌入式</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/">
+          
+          <i class="fas fa-microchip" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>硬件相关</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/project/statistics">
+          
+          <i class="fas fa-chart-simple" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>数据统计</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/relaxation" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-face-smile" style="zoom: 0.6;"></i>
+      
+      <span>休闲</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/relaxation/musics">
+          
+          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Musics</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/relaxation/movies">
+          
+          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Movies</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友人帐</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Badchenの赛博小窝</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-home"></i>
+			
+			首页
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/archives " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-archive" style="position: absolute;left:50px" ></i>
+			      
+		          <span>归档</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/tags " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-tags" style="position: absolute;left:50px" ></i>
+			      
+		          <span>标签</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-file"></i>
+			
+			文章
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-gears" style="position: absolute;left:50px" ></i>
+			      
+		          <span>开发经验</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E6%B8%B8%E6%88%8F%E4%B9%8B%E6%97%85/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-gamepad" style="position: absolute;left:50px" ></i>
+			      
+		          <span>游戏心得</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-person-chalkboard" style="position: absolute;left:50px" ></i>
+			      
+		          <span>实用技巧</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E6%83%B3/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-chart-simple" style="position: absolute;left:50px" ></i>
+			      
+		          <span>生活随想</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-bookmark"></i>
+			
+			项目
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E7%9B%B8%E5%85%B3/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-computer" style="position: absolute;left:50px" ></i>
+			      
+		          <span>软件相关</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-link" style="position: absolute;left:50px" ></i>
+			      
+		          <span>嵌入式</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/categories/%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/ " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-microchip" style="position: absolute;left:50px" ></i>
+			      
+		          <span>硬件相关</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/project/statistics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-chart-simple" style="position: absolute;left:50px" ></i>
+			      
+		          <span>数据统计</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-face-smile"></i>
+			
+			休闲
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/relaxation/musics " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Musics</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/relaxation/movies " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Movies</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友人帐
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<!-- <div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')"> -->
+<div class="bg-cover pd-header post-cover" style="background-color: rgba(0, 0, 0, 0);">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">TCL语言语法汇总（基础篇）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/TCL/">
+                                <span class="chip bg-color">TCL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                实用技巧
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-12-15
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-12-15
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.2k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-脚本、命令和单词符号"><a href="#1-脚本、命令和单词符号" class="headerlink" title="1    脚本、命令和单词符号"></a>1    脚本、命令和单词符号</h2><p>一个TCL脚本可以包含一个或多个命令，相邻命令之间必须用换行符或分号隔开。如下所示：</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">a</span> 1		<span class="token comment"># 设置a的值为1</span>
+<span class="token keyword">set</span> <span class="token variable">b</span> 2		<span class="token comment"># 设置b的值为2</span>
+
+<span class="token keyword">set</span> <span class="token variable">a</span> 1;set b 2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="2-置换（substitution）"><a href="#2-置换（substitution）" class="headerlink" title="2    置换（substitution）"></a>2    置换（substitution）</h2><p>TCL解释器在解释命令时，把所有的命令都当作字符串对待，例如：</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">x</span> 10	<span class="token comment"># 定义变量x并把x赋值10</span>
+<span class="token keyword">set</span> <span class="token variable">y</span> x<span class="token operator">+</span>100	<span class="token comment"># y的值是x+100而不是110</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>在这个时候，如果我们想要使用x的值10，就需要告诉TCL解释器，我们称这个过程为<strong>变量置换</strong>：</p>
+<h3 id="2-1-变量置换"><a href="#2-1-变量置换" class="headerlink" title="2.1    变量置换"></a>2.1    变量置换</h3><p>变量置换用一个 <code>$</code>符号标记，变量置换会导致变量的值插入到一个单词中。</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">y</span> $<span class="token variable">x</span><span class="token operator">+</span>100	<span class="token comment">#y的值为10+100而不是110</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果想要y的值得到110，还必须进行进一步置换，我们称这个过程为<strong>命令置换</strong>：</p>
+<h3 id="2-2-命令置换"><a href="#2-2-命令置换" class="headerlink" title="2.2    命令置换"></a>2.2    命令置换</h3><p>命令置换是用 <code>[]</code>括起来的TCL命令及其参数，命令置换会导致一个命令的所有或部分单词被另一个命令的结果所代替。</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">y</span> <span class="token punctuation">[</span><span class="token keyword">expr</span> $<span class="token variable">x</span><span class="token operator">+</span>100<span class="token punctuation">]</span>	<span class="token comment">#此时y值为110</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当TCL解释器遇到 <code>[]</code>时，它就会把随后的 <code>expr</code>作为一个命令名，从而激活与其相关的C/C++过程，并把 <code>expr</code>和变量置换后得到的 <code>10+100</code>传递给该命令过程进行处理。</p>
+<p>注意，<code>[]</code>中必须是一个合法的TCL脚本，长度不限，<code>[]</code>中脚本的值为最后一个命令的返回值。</p>
+<h3 id="2-3-反斜杠置换"><a href="#2-3-反斜杠置换" class="headerlink" title="2.3    反斜杠置换"></a>2.3    反斜杠置换</h3><p>TCL语言的反斜杠用法类似于C语言，主要用于在单词符号中插入诸如换行符、空格等被解释器当作特殊符号对待的字符</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">msg</span> multiple\ space	<span class="token comment"># msg的值为multiple space</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果没有反斜杠的话，TCL会报错，因为解释器会把最后两个单词之间的空格认为是分隔符，于是发现set命令有两个参数，加入了反斜杠后，空格不再被当作分隔符，’multiple space’被认为是一个单词。</p>
+<h3 id="2-4-双引号和花括号"><a href="#2-4-双引号和花括号" class="headerlink" title="2.4    双引号和花括号"></a>2.4    双引号和花括号</h3><p>除了使用反斜杠外，TCL提供另外两种方法使得解释器把分隔符和置换符当作普通字符，而不做特殊处理，它们分别是<strong>使用双引号和花括号</strong>。</p>
+<ul>
+<li>对于双引号，TCL解释器对其中的各种分隔符将不做处理，但是对换行符和 <code>$</code>、<code>[]</code>两种置换符会照常处理</li>
+</ul>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">x</span> 100		<span class="token comment"># x的值为100</span>
+<span class="token keyword">set</span> <span class="token variable">y</span> <span class="token string">"$x ddd"</span>	<span class="token comment"># y的值为100 ddd</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>对于花括号，所有特殊字符都将成为普通字符，失去其特殊意义</li>
+</ul>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">y</span> <span class="token punctuation">{</span><span class="token operator">/</span>n$<span class="token variable">x</span> <span class="token punctuation">[</span><span class="token keyword">expr</span> 10<span class="token operator">+</span>100<span class="token punctuation">]</span><span class="token punctuation">}</span>	<span class="token comment"># y的值为/n$x [expr 10+100]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="3-注释"><a href="#3-注释" class="headerlink" title="3    注释"></a>3    注释</h2><p>TCL 中的注释符是’#’，’#’和直到所在行结尾的所有字符都被TCL 看作注释，TCL 解释器对注释将不作任何处理。<strong>不过，要注意的是，’#’必须出现在TCL 解释器期望命令的第一个字符出现的地方，才被当作注释。</strong></p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token comment">#This is a comment</span>
+<span class="token keyword">set</span> <span class="token variable">a</span> 100 <span class="token comment"># Not a comment</span>
+<span class="token keyword">set</span> <span class="token variable">b</span> 101 ; <span class="token comment"># this is a comment</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>第二行中’#’就不被当作注释符，因为它出现在命令的中间，TCL 解释器把它和后面的字符当作命令的参数处理，从而导致错误。<strong>而第四行的’#’就被作为注释，因为前一个命令已经用一个分号结束，TCL 解释器期望下一个命令接着出现。现在在这个位置出现’#’，随后的字符就被当作注释了。</strong></p>
+<h2 id="4-变量"><a href="#4-变量" class="headerlink" title="4    变量"></a>4    变量</h2><h3 id="4-1-简单变量"><a href="#4-1-简单变量" class="headerlink" title="4.1    简单变量"></a>4.1    简单变量</h3><p>一个TCL 的简单变量包含两个部分：名字和值。名字和值都可以是任意字符串。不过为了更好的使用置换(substitution)，变量名最好按C\C++语言中标识符的命名规则命名。</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">a</span> 2			<span class="token comment"># 设置a的值为2</span>
+<span class="token keyword">set</span> <span class="token variable">a</span>.1 4		<span class="token comment"># 设置a.1的值为4</span>
+<span class="token keyword">set</span> <span class="token variable">b</span> $<span class="token variable">a</span>.1		<span class="token comment"># 设置b的值为2.1（不是数，是字符串）</span>
+<span class="token keyword">set</span> <span class="token variable">b</span> $<span class="token variable">{a.1}</span>	<span class="token comment"># 设置b的值为a.1的值（即4）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="4-2-数组"><a href="#4-2-数组" class="headerlink" title="4.2    数组"></a>4.2    数组</h3><p>数组是一些元素的集合。TCL 的数组和普通计算机语言中的数组有很大的区别。在 TCL 中，不能单独声明一个数组，数组只能和数组元素一起声明。数组中，数组元素的名字包含两部分：数组名和数组中元素的名字，TCL 中数组元素的名字（下标〕可以为任何字符串。</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">day</span><span class="token punctuation">(</span>monday<span class="token punctuation">)</span> 1	<span class="token comment"># 生成一个名为day的数组，同时在数组中生成一个值为1名为monday的数组元素</span>
+<span class="token keyword">set</span> <span class="token variable">day</span><span class="token punctuation">(</span>tuesday<span class="token punctuation">)</span> 2	<span class="token comment"># 生成一个名为tuesday的数组元素，并把值置为2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>简单变量的置换已经在前一节讨论过，这里讲一下数组元素的置换。除了有括号之外，数组元素<br>的置换和简单变量类似。</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">a</span> monday
+<span class="token keyword">set</span> <span class="token variable">day</span><span class="token punctuation">(</span>monday<span class="token punctuation">)</span> 1
+<span class="token keyword">set</span> <span class="token variable">b</span> $<span class="token variable">day</span><span class="token punctuation">(</span>monday<span class="token punctuation">)</span>	<span class="token comment"># b的值为1，即day(monday)的值。</span>
+<span class="token keyword">set</span> <span class="token variable">c</span> $<span class="token variable">day</span><span class="token punctuation">(</span>$<span class="token variable">a</span><span class="token punctuation">)</span> 		<span class="token comment"># c的值为1，即day(monday)的值。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>TCL 不能支持复杂的数据类型,这是一个很大的缺憾，也是 TCL 受指责很多的方面。但是 TCL 的一个扩展 ITCL 填补了这个缺憾。</p>
+<h3 id="4-3-相关命令"><a href="#4-3-相关命令" class="headerlink" title="4.3    相关命令"></a>4.3    相关命令</h3><ul>
+<li><code>set</code>命令：前面已经介绍，不再赘述</li>
+<li><code>unset</code>命令：这个命令从解释器中删除变量，它后面可以有任意多个参数，每个参数是一个变量名,可以是简单变量，也可以是数组或数组元素。</li>
+</ul>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">unset</span> a b day<span class="token punctuation">(</span>monday<span class="token punctuation">)</span>	<span class="token comment"># 删除了变量a、b 和数组元素day(monday)，但是数组day并没有删除</span>
+<span class="token keyword">unset</span> day			   <span class="token comment"># 删除数组day</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li><code>append</code>和 <code>incr</code>：这两个命令提供了改变变量的值的简单手段。<code>append</code>命令把文本加到一个变量的后面，<code>incr</code>命令把一个变量值加上一个整数，要求原变量和增加值都是整数。</li>
+</ul>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">txt</span> hello				<span class="token comment"># txt值为hello</span>
+<span class="token keyword">append</span> txt <span class="token string">"! How are you"</span>	 <span class="token comment"># txt值为hello! How are you</span>
+<span class="token keyword">set</span> <span class="token variable">b</span> 2					    <span class="token comment"># b值为2</span>
+<span class="token keyword">incr</span> b 3					<span class="token comment"># b值为5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="5-表达式"><a href="#5-表达式" class="headerlink" title="5    表达式"></a>5    表达式</h2><h3 id="5-1-操作数"><a href="#5-1-操作数" class="headerlink" title="5.1    操作数"></a>5.1    操作数</h3><p>TCL 表达式的操作数通常是整数或实数。整数一般是十进制的， 但如果整数的第一个字符是0(zero)，那么TCL 将把这个整数看作八进制的，如果前两个字符是0x 则这个整数被看作是十六进制的。TCL 的实数的写法与ANSI C 中完全一样。</p>
+<h3 id="5-2-运算符和优先级"><a href="#5-2-运算符和优先级" class="headerlink" title="5.2    运算符和优先级"></a>5.2    运算符和优先级</h3><p>下表中的运算符是按优先级从高到低往下排列的。同一格中的运算符优先级相同。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">语法形式</th>
+<th style="text-align:center">结果</th>
+<th style="text-align:center">操作数类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>-a</code></td>
+<td style="text-align:center">负a</td>
+<td style="text-align:center"><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>!a</code></td>
+<td style="text-align:center">非a</td>
+<td style="text-align:center"><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>~a</code></td>
+<td style="text-align:center">按位取反</td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a*b</code></td>
+<td style="text-align:center">乘</td>
+<td style="text-align:center"><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a/b</code></td>
+<td style="text-align:center">除</td>
+<td style="text-align:center"><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a%b</code></td>
+<td style="text-align:center">取模</td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a+b</code></td>
+<td style="text-align:center">加</td>
+<td style="text-align:center"><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a-b</code></td>
+<td style="text-align:center">减</td>
+<td style="text-align:center"><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&lt;&lt;b</code></td>
+<td style="text-align:center">左移位</td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&gt;&gt;b</code></td>
+<td style="text-align:center">右移位</td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&lt;b</code></td>
+<td style="text-align:center">小于</td>
+<td style="text-align:center"><code>int,float,string</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&gt;b</code></td>
+<td style="text-align:center">大于</td>
+<td style="text-align:center"><code>int,float,string</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&lt;=b</code></td>
+<td style="text-align:center">小于等于</td>
+<td style="text-align:center"><code>int,float,string</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&gt;=b</code></td>
+<td style="text-align:center">大于等于</td>
+<td style="text-align:center"><code>int,float,string</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a==b</code></td>
+<td style="text-align:center">等于</td>
+<td style="text-align:center"><code>int,float,string</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a!=b</code></td>
+<td style="text-align:center">不等于</td>
+<td style="text-align:center"><code>int,float,string</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&amp;b</code></td>
+<td style="text-align:center">按位与</td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a^b</code></td>
+<td style="text-align:center">按位异或</td>
+<td style="text-align:center"><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center">`a\</td>
+<td style="text-align:center">b`</td>
+<td style="text-align:center">按位或</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a&amp;&amp;b</code></td>
+<td style="text-align:center">逻辑与</td>
+<td style="text-align:center"><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center">`a\</td>
+<td style="text-align:center">\</td>
+<td style="text-align:center">b`</td>
+<td>逻辑或</td>
+<td><code>int,float</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a?b:c</code></td>
+<td style="text-align:center">选择运算</td>
+<td style="text-align:center"><code>a:int,float</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="5-3-数学函数"><a href="#5-3-数学函数" class="headerlink" title="5.3    数学函数"></a>5.3    数学函数</h3><p>TCL 支持常用的数学函数，表达式中数学函数的写法类似于C\C++语言的写法，数学函数的参数可以是任意表达式，多个参数之间用逗号隔开。其支持的数学函数如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数名称</th>
+<th style="text-align:center">函数功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>abs(x)</code></td>
+<td style="text-align:center">x的绝对值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>acos(x)</code></td>
+<td style="text-align:center">x的反余弦函数值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>asin(x)</code></td>
+<td style="text-align:center">x的反正弦函数值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>atan(x)</code></td>
+<td style="text-align:center">x的反正切函数值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>atan2(x,y)</code></td>
+<td style="text-align:center">x/y的反正切函数值（复数幅角）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>ceil(x)</code></td>
+<td style="text-align:center">不小于x的最小整数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cos(x)</code></td>
+<td style="text-align:center">x的余弦函数值（弧度制）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>cosh(x)</code></td>
+<td style="text-align:center">x的双曲余弦函数值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>double(x)</code></td>
+<td style="text-align:center">x类型转换为双精度浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>exp(x)</code></td>
+<td style="text-align:center">自然常数e的x次方</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>floor(x)</code></td>
+<td style="text-align:center">不大于x的最大整数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>fmod(x,y)</code></td>
+<td style="text-align:center">对x/y进行浮点取余</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>hypot(x,y)</code></td>
+<td style="text-align:center">对x和y的平方和求算术平方根</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>int(x)</code></td>
+<td style="text-align:center">x类型转换为整型数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>log(x)</code></td>
+<td style="text-align:center">求x的自然对数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>log10(x)</code></td>
+<td style="text-align:center">求x以10为底的对数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>pow(x,y)</code></td>
+<td style="text-align:center">求x的y次方</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>round(x)</code></td>
+<td style="text-align:center">求x四舍五入后的结果</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>sin(x)</code></td>
+<td style="text-align:center">x的正弦函数值（弧度制）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>sinh(x)</code></td>
+<td style="text-align:center">x的双曲正弦函数值</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>sqrt(x)</code></td>
+<td style="text-align:center">x的算术平方根</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>tan(x)</code></td>
+<td style="text-align:center">x的正切函数值（弧度制）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>tanh(x)</code></td>
+<td style="text-align:center">x的双曲正切函数值</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="6-List"><a href="#6-List" class="headerlink" title="6    List"></a>6    List</h2><h3 id="6-1-list命令"><a href="#6-1-list命令" class="headerlink" title="6.1    list命令"></a>6.1    list命令</h3><div class="note default"><p>语法：<code>list?    value value...?    #生成一个list，list 的元素就是所有的value</code></p>
+</div>
+<p>list 这个概念在TCL 中是用来表示集合的。TCL 中 list 是由一堆元素组成的有序集合，list 可以嵌套定义，list 每个元素可以是任意字符串，也可以是list。</p>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token punctuation">{</span><span class="token punctuation">}</span>			<span class="token comment"># 空list</span>
+<span class="token punctuation">{</span>a b c d<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>a <span class="token punctuation">{</span>b c<span class="token punctuation">}</span> d<span class="token punctuation">}</span>	<span class="token comment"># list可以嵌套</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>list 是TCL 中比较重要的一种数据结构，对于编写复杂的脚本有很大的帮助，TCL 提供了很多基本命令对list 进行操作，下面一一介绍：</p>
+<h3 id="6-2-concat命令"><a href="#6-2-concat命令" class="headerlink" title="6.2    concat命令"></a>6.2    concat命令</h3><div class="note default"><p>语法：<code>concat list ?list...?    #把多个list 合成一个list，每个list 变成新list 的一个元素</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">a</span> <span class="token punctuation">[</span><span class="token keyword">list</span> 1 2 <span class="token punctuation">{</span>3 4<span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token keyword">set</span> <span class="token variable">b</span> <span class="token punctuation">[</span><span class="token keyword">list</span> a b <span class="token punctuation">{</span>c d<span class="token punctuation">}</span><span class="token punctuation">]</span>
+<span class="token keyword">set</span> <span class="token variable">tet</span> <span class="token punctuation">[</span><span class="token keyword">concat</span> $<span class="token variable">a</span> $<span class="token variable">b</span><span class="token punctuation">]</span>	<span class="token comment"># 返回"1 2 {3 4} a b {c d}"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="6-3-lindex命令"><a href="#6-3-lindex命令" class="headerlink" title="6.3    lindex命令"></a>6.3    lindex命令</h3><div class="note default"><p>语法：<code>lindex list index    #返回list 的第index 个(0-based)元素</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">lindex</span> <span class="token punctuation">{</span>1 2 <span class="token punctuation">{</span>3 4<span class="token punctuation">}</span><span class="token punctuation">}</span>	<span class="token comment"># 返回"3 4"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="6-4-llength命令"><a href="#6-4-llength命令" class="headerlink" title="6.4    llength命令"></a>6.4    llength命令</h3><div class="note default"><p>语法：<code>llength list        #返回list 的元素个数</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">llength</span> <span class="token punctuation">{</span>1 2 <span class="token punctuation">{</span>3 4<span class="token punctuation">}</span><span class="token punctuation">}</span>	<span class="token comment"># 返回3</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="6-5-linsert命令"><a href="#6-5-linsert命令" class="headerlink" title="6.5    linsert命令"></a>6.5    linsert命令</h3><div class="note default"><p>语法：<code>linsert list index value ?value...?    #返回一个新串，新串是把所有的 value 参数值插入 list 的第 index 个(0-based)元素之前得到。</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">linsert</span> <span class="token punctuation">{</span>1 2 <span class="token punctuation">{</span>3 4<span class="token punctuation">}</span><span class="token punctuation">}</span> 1 7 8 <span class="token punctuation">{</span>9 10<span class="token punctuation">}</span>	<span class="token comment"># 返回"1 7 8 {9 10} 2 {3 4}"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="6-6-lreplace命令"><a href="#6-6-lreplace命令" class="headerlink" title="6.6    lreplace命令"></a>6.6    lreplace命令</h3><div class="note default"><p>语法：<code>lreplace list first last ?value value ...?    #返回一个新串，新串是把 list 的第 first(0-based) 到第 last 个 (0-based) 元素用所有的 value 参数替换得到的。如果没有 value 参数，就表示删除第 first 到第 last 个元素。</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">lreplace</span> <span class="token punctuation">{</span>1 7 8 <span class="token punctuation">{</span>9 10<span class="token punctuation">}</span> 2 <span class="token punctuation">{</span>3 4<span class="token punctuation">}</span><span class="token punctuation">}</span> 3 3	<span class="token comment"># 返回"1 7 8 2 {3 4}"</span>
+<span class="token keyword">lreplace</span> <span class="token punctuation">{</span>1 7 8 2 <span class="token punctuation">{</span>3 4<span class="token punctuation">}</span><span class="token punctuation">}</span> 4 4 4 5 6	<span class="token comment"># 返回"1 7 8 2 4 5 6"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="6-7-lrange命令"><a href="#6-7-lrange命令" class="headerlink" title="6.7    lrange命令"></a>6.7    lrange命令</h3><div class="note default"><p>语法：<code>lrange list first last    #返回 list 的第 first (0-based)到第 last (0-based)元素组成的串,如果 last 的值是 end。就是从第 first 个直到串的最后。</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">lrange</span> <span class="token punctuation">{</span>1 7 8 2 4 5 6<span class="token punctuation">}</span> 3 end	<span class="token comment"># 返回"2 4 5 6"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="6-8-lappend命令"><a href="#6-8-lappend命令" class="headerlink" title="6.8    lappend命令"></a>6.8    lappend命令</h3><div class="note default"><p>语法：<code>lappend varname value ?value...?    #把每个 value 的值作为一个元素附加到变量 varname 后面，并返回变量的新值，如果 varname 不存在，就生成这个变量。</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">lappend</span> a 1 2 3		<span class="token comment"># 将1 2 3的值附加到a的后面</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="6-9-lsearch命令"><a href="#6-9-lsearch命令" class="headerlink" title="6.9    lsearch命令"></a>6.9    lsearch命令</h3><div class="note default"><p>语法：<code>lsearch ?-exact? ?-glob? ?-regexp? list pattern    #返回list 中第一个匹配模式pattern 的元素的索引，如果找不到匹配就返回-1。-exact、-glob、-regexp 是三种模式匹配的技术。</code></p>
+</div>
+<ul>
+<li>-exact 表示精确匹配</li>
+<li>-glob 的匹配方式和 string match 命令的匹配方式相同，将在后面第八节介绍 string 命令时介绍</li>
+<li>-regexp 表示正规表达式匹配，将在第八节介绍 regexp 命令时介绍。缺省时使用 -glob 匹配</li>
+</ul>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">set</span> <span class="token variable">a</span> <span class="token punctuation">{</span> how are you <span class="token punctuation">}</span>
+<span class="token keyword">lsearch</span> $<span class="token variable">a</span> y<span class="token operator">*</span>	<span class="token comment"># 返回2</span>
+<span class="token keyword">lsearch</span> $<span class="token variable">a</span> y<span class="token operator">?</span>	<span class="token comment"># 返回-1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="6-10-lsort命令"><a href="#6-10-lsort命令" class="headerlink" title="6.10    lsort命令"></a>6.10    lsort命令</h3><div class="note default"><p>语法：<code>lsort ?options? list    #这个命令返回把list 排序后的串</code></p>
+</div>
+<p>options可以是如下值：</p>
+<ul>
+<li><code>ascii</code>：按 ASCII 字符的顺序排序比较.这是缺省情况。</li>
+<li><code>dictionary</code>： 按字典排序,与-ascii 不同的地方是：(1)不考虑大小写；(2)如果元素中有数字的话,数字被当作整数来排序。</li>
+<li><code>integer</code>：把 list 的元素转换成整数，按整数排序。</li>
+<li><code>real</code>：把 list 的元素转换成浮点数，按浮点数排序。</li>
+<li><code>increasing</code>：升序(按ASCII 字符比较)</li>
+<li><code>decreasing</code>：降序(按ASCII 字符比较)</li>
+<li><code>command</code>：command TCL 自动利用command 命令把每两个元素一一比较，然后给出排序结果。</li>
+</ul>
+<h3 id="6-11-split命令"><a href="#6-11-split命令" class="headerlink" title="6.11    split命令"></a>6.11    split命令</h3><div class="note default"><p>语法：<code>split string ?splitChars?    # 把字符串 string 按分隔符 splitChars 分成一个个单词，返回由这些单词组成的串。如果 splitChars 是一个空字符{}，string 被按字符分开。如果 splitChars 没有给出，以空格为分隔符。</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">split</span> <span class="token string">"how.are.you"</span> .		<span class="token comment"># 返回"how are you"</span>
+<span class="token keyword">split</span> <span class="token string">"how are you"</span>			<span class="token comment"># 返回"how are you"</span>
+<span class="token keyword">split</span> <span class="token string">"how are you"</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>		<span class="token comment"># 返回"h o w { } a r e { } y o u"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h3 id="6-12-join命令"><a href="#6-12-join命令" class="headerlink" title="6.12    join命令"></a>6.12    join命令</h3><div class="note default"><p>语法：<code>join list ?joinString?    # join 命令是命令的逆。这个命令把list 的所有元素合并到一个字符串中，中间以joinString 分开。缺省的joinString 是空格</code></p>
+</div>
+<pre class="line-numbers language-tcl" data-language="tcl"><code class="language-tcl"><span class="token keyword">join</span> <span class="token punctuation">{</span>h o w <span class="token punctuation">{</span> <span class="token punctuation">}</span> a r e <span class="token punctuation">{</span> <span class="token punctuation">}</span> y o u<span class="token punctuation">}</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>	  <span class="token comment"># 返回how are you</span>
+<span class="token keyword">join</span> <span class="token punctuation">{</span>how are you<span class="token punctuation">}</span> .				<span class="token comment"># 返回how.are.you</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Badchen666</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://badchen666.github.io/2025/12/15/tcl-yu-yan-yu-fa-hui-zong-ji-chu-pian/">https://badchen666.github.io/2025/12/15/tcl-yu-yan-yu-fa-hui-zong-ji-chu-pian/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Badchen666</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/TCL/">
+                                    <span class="chip bg-color">TCL</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .waline-card {
+        margin: 1.5rem auto;
+    }
+    .waline-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #waline p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+    #waline blockquote p {
+        text-indent: 0.2rem;
+    }
+    #waline a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+    #waline img {
+        max-width: 100%;
+        cursor: pointer;
+    }
+    #waline ol li {
+        list-style-type: decimal;
+    }
+    #waline ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+    #waline ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+    #waline ul li {
+        list-style-type: disc;
+    }
+    #waline ul ul li {
+        list-style-type: circle;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    #waline table, th, td {
+        border: 0;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+    #waline h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+    #waline h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+    #waline h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+    #waline h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+    #waline h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+    #waline p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+    #waline hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+    #waline blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+    #waline pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+    #waline code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+    #waline pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+    #waline pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+    #waline code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+    #waline b,
+    strong {
+        font-weight: bold;
+    }
+    #waline dfn {
+        font-style: italic;
+    }
+    #waline small {
+        font-size: 85%;
+    }
+    #waline cite {
+        font-style: normal;
+    }
+    #waline mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+    #waline table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+    #waline table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+    #waline table td {
+        min-width: 80px;
+    }
+    #waline [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+  </style>
+  
+  <div class="card waline-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="waline" class="card-content" style="display: grid">
+    </div>
+  </div>
+  
+
+  <!-- <script src="//cdn.jsdelivr.net/npm/@waline/client"></script> -->
+  <script src="/libs/waline/Waline.min.js"></script>
+  <script>
+    new Waline({
+        el: '#waline',
+        serverURL: 'https://badchen666.lavoisier7.xyz/',
+        avatar: 'mm'    
+    });
+  </script> 
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/12/15/tcl-yu-yan-yu-fa-hui-zong-ying-yong-pian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="TCL语言语法汇总（应用篇）">
+                        
+                        <span class="card-title">TCL语言语法汇总（应用篇）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            学习TCL脚本语言时将相关语法以笔记的形式进行汇总
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-12-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AE%9E%E7%94%A8%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    实用技巧
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/TCL/">
+                        <span class="chip bg-color">TCL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/10/12/part1-ji-chu-ip-he-jie-shao/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="一、基础IP核介绍">
+                        
+                        <span class="card-title">一、基础IP核介绍</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在进行系统搭建时查阅了很多资料并积累了一些心得，将其汇总便于日后参考
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-10-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" class="post-category">
+                                    开发经验
+                                </a>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/2025%E5%B5%8C%E5%85%A5%E5%BC%8F/" class="post-category">
+                                    2025嵌入式
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2024-2026</span>
+            
+            <a href="/about" target="_blank">Badchen666</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">38k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2024";
+                        var startMonth = "11";
+                        var startDate = "28";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/badchen666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:209650350@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=209650350" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 209650350" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="30"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '2');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body>
+
+</html>

@@ -59,7 +59,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -702,19 +702,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>接下来介绍的IP主要是对于本项目中具有一定作用的模块，在保留较高自由度的同时，也作为软核出现（但并不意味着前面的都是硬核），更有利于开发者进行后端设计。</p>
-<h1>1.AXI Video Direct Memory Access(VDMA IP)</h1>
-<h2 id="1-1-从DMA到VDMA">1.1 从DMA到VDMA</h2>
-<p>首先要明确我们为什么要用DMA，同时VDMA相较于一般的DMA又有什么针对视频传输的优越性，在此基础上才能对该IP有更全面深入的认识。</p>
+<h1 id="1-AXI-Video-Direct-Memory-Access-VDMA-IP"><a href="#1-AXI-Video-Direct-Memory-Access-VDMA-IP" class="headerlink" title="1.AXI Video Direct Memory Access(VDMA IP)"></a>1.AXI Video Direct Memory Access(VDMA IP)</h1><h2 id="1-1-从DMA到VDMA"><a href="#1-1-从DMA到VDMA" class="headerlink" title="1.1 从DMA到VDMA"></a>1.1 从DMA到VDMA</h2><p>首先要明确我们为什么要用DMA，同时VDMA相较于一般的DMA又有什么针对视频传输的优越性，在此基础上才能对该IP有更全面深入的认识。</p>
 <p>DMA，全称Direct Memory Access，即直接存储器访问。DMA传输将数据从一个地址空间复制到另一个地址空间，提供在外设和存储器之间或者存储器和存储器之间的高速数据传输。CPU无时不刻的在处理着大量的事务，但有些事情却没有那么重要，比方说数据的复制和存储数据，如果我们把这部分的CPU资源拿出来，让CPU去处理其他的复杂计算事务，就可以更好地利用CPU资源。</p>
 <p>在本项目中，一方面涉及到连续的视频流数据存储，另一方面硬件加速模块也无时无刻不在吞吐着大量数据，如果把这些任务全部交给CPU，显然会严重拖慢系统速度。</p>
 <p>同样，DMA的数据传输也非常的“简单粗暴”，用户将<strong>源地址、目标地址、传输数据量</strong>这三个目标参数设定好后，DMA控制器就会启动数据传输，当剩余传输数据量为0时，达到传输终点，结束DMA传输 ，当然，DMA 还有循环传输模式 当到达传输终点时会重新启动DMA传输。将这个过程用AXI总线封装起来，就构成了AXI-DMA IP核。</p>
 <p>VDMA则在DMA的基础上加入了<strong>帧缓存</strong>和<strong>双/多缓冲</strong>机制，另外，VDMA可以很好地契合Zynq内部架构，缩短开发周期。</p>
 <ul>
-<li>
-<p>帧缓存机制：简称帧缓存或显存，它是屏幕所显示画面的一个直接映象，又称为位映射图(Bit Map)或光栅。帧缓存的每一存储单元对应屏幕上的一个像素，整个帧缓存对应一帧图像。</p>
+<li><p>帧缓存机制：简称帧缓存或显存，它是屏幕所显示画面的一个直接映象，又称为位映射图(Bit Map)或光栅。帧缓存的每一存储单元对应屏幕上的一个像素，整个帧缓存对应一帧图像。</p>
 </li>
-<li>
-<p>双缓冲机制：类似于乒乓读写，对双缓冲其实就是开辟了两块缓冲空间，多缓冲就是多块，该机制将屏幕读取与视频数据写入的数据流分开，两者分别在不同地址进行，当某一帧写完后就立刻切换到另一个缓存地址接着写下一帧，同时屏幕开始读取在刚刚地址空间写完的数据，循环往复。</p>
+<li><p>双缓冲机制：类似于乒乓读写，对双缓冲其实就是开辟了两块缓冲空间，多缓冲就是多块，该机制将屏幕读取与视频数据写入的数据流分开，两者分别在不同地址进行，当某一帧写完后就立刻切换到另一个缓存地址接着写下一帧，同时屏幕开始读取在刚刚地址空间写完的数据，循环往复。</p>
 </li>
 </ul>
 <p>此外，VDMA还具有很多优势，具体列举如下所示：</p>
@@ -745,8 +741,7 @@
 <div class="checkbox green checked"><input type="checkbox" checked="checked">
             <p>基础AXI流数据位宽为8的整数倍，如8</p>
             </div>
-<h2 id="1-2-VDMA基础配置">1.2 VDMA基础配置</h2>
-<p>现在，我们打开VDMA的配置界面，可以看到如下接口，我们根据其功能，可以大致将其分为5组AXI总线：</p>
+<h2 id="1-2-VDMA基础配置"><a href="#1-2-VDMA基础配置" class="headerlink" title="1.2 VDMA基础配置"></a>1.2 VDMA基础配置</h2><p>现在，我们打开VDMA的配置界面，可以看到如下接口，我们根据其功能，可以大致将其分为5组AXI总线：</p>
 <p><img src="/medias/images/VDMA.png" alt="VDMA IP配置图"></p>
 <ul>
 <li>AXI4-Lite接口（S_AXI_LITE）：PS通过该接口来配置VDMA</li>
@@ -755,12 +750,8 @@
 <li>AXI4-Stream主接口（M_AXI_MM2S）：AXI Stream视频流读出图像</li>
 <li>AXI4-Stream从接口（S_AXI_S2MM）：AXI Stream视频流写入图像</li>
 </ul>
-<p>各种总线都有自己的时钟信号，但这些时钟是异步的，并不需要用同一个时钟。但在设计过程中，如无特别需求，可以使用相同的时钟以降低设计难度。<br>
-前缀S_、M_分别表示Slave和Master；后缀MM2S、S2MM说明数据流向是从memory map到stream还是从stream到memory map。<br>
-通过该配置图也可以发现并不是每个端口都一定使能，我们可以通过只使能读/写通道disable掉一些端口。<br>
-关于VDMA为什么采用不同种类的AXI接口实现功能，会在后面进行详细介绍。</p>
-<h2 id="1-3-VDMA高级配置">1.3 VDMA高级配置</h2>
-<p>除了上述所说AXI总线信号之外，该IP还内置了<strong>视频同步接口信号</strong>和<strong>GenLock相关信号</strong>，下面分别进行介绍：</p>
+<p>各种总线都有自己的时钟信号，但这些时钟是异步的，并不需要用同一个时钟。但在设计过程中，如无特别需求，可以使用相同的时钟以降低设计难度。<br>前缀S<em>、M</em>分别表示Slave和Master；后缀MM2S、S2MM说明数据流向是从memory map到stream还是从stream到memory map。<br>通过该配置图也可以发现并不是每个端口都一定使能，我们可以通过只使能读/写通道disable掉一些端口。<br>关于VDMA为什么采用不同种类的AXI接口实现功能，会在后面进行详细介绍。</p>
+<h2 id="1-3-VDMA高级配置"><a href="#1-3-VDMA高级配置" class="headerlink" title="1.3 VDMA高级配置"></a>1.3 VDMA高级配置</h2><p>除了上述所说AXI总线信号之外，该IP还内置了<strong>视频同步接口信号</strong>和<strong>GenLock相关信号</strong>，下面分别进行介绍：</p>
 <div class="tip key"><p>视频同步接口信号</p>
 </div>
 <ul>
@@ -769,30 +760,23 @@
 </ul>
 <div class="tip key"><p>GenLock相关信号</p>
 </div>
-<p>Genlock，同步锁相，可以使一套或多套系统与同一同步源实现同步。能够使视频的刷新和外部视频源保持一致。当提供了一个适当的信号后，系统就会把它的显示刷新率和这个信号进行锁定 。<br>
-在许多视频应用中，输入端产生数据的速率往往不同于输出端数据速率，为了避免由速率不一致导致的潜在错误，帧缓冲的使用是很有必要的。帧缓冲机制开辟多个缓冲页，用于保存数据，输入和输出端分别操作不同的帧存，从而避免了冲突。<br>
-VDMA的锁相同步特性正是用于阻止读、写通道同时操作同一个帧存。VDMA的每个通道都可以选择自己的操作类型（同步锁相主/从或者动态同步锁相主/从），利用该特性，禁止主从接口同时访问同一缓存，从而保持同步。</p>
-<p>VDMA支持四种形式的锁相同步，分别如下所示：</p>
-<div class="checkbox yellow"><input type="radio">
+<p>Genlock，同步锁相，可以使一套或多套系统与同一同步源实现同步。能够使视频的刷新和外部视频源保持一致。当提供了一个适当的信号后，系统就会把它的显示刷新率和这个信号进行锁定 。<br>在许多视频应用中，输入端产生数据的速率往往不同于输出端数据速率，为了避免由速率不一致导致的潜在错误，帧缓冲的使用是很有必要的。帧缓冲机制开辟多个缓冲页，用于保存数据，输入和输出端分别操作不同的帧存，从而避免了冲突。<br>VDMA的锁相同步特性正是用于阻止读、写通道同时操作同一个帧存。VDMA的每个通道都可以选择自己的操作类型（同步锁相主/从或者动态同步锁相主/从），利用该特性，禁止主从接口同时访问同一缓存，从而保持同步。</p>
+<p>VDMA支持四种形式的锁相同步，分别如下所示：<br></p><div class="checkbox yellow"><input type="radio">
             <p>Genlock Master</p>
-            </div>
+            </div><p></p>
 <ul>
-<li>
-<p><strong>读通道(MM2S)</strong>：当配置为Genlock Master时，该通道不会跳过或者重复任一帧数据，并把当前帧的编号输出在mm2s_frame_ptr_out端口。通道不会检测mm2s_frame_ptr_in端口提供的帧编号。Genlock Slave通道应跟随Genlock Master通道变化，但有一定的延迟。延迟大小预定义在寄存器中（*frmdly_stride[28:24]）。</p>
+<li><p><strong>读通道(MM2S)</strong>：当配置为Genlock Master时，该通道不会跳过或者重复任一帧数据，并把当前帧的编号输出在mm2s_frame_ptr_out端口。通道不会检测mm2s_frame_ptr_in端口提供的帧编号。Genlock Slave通道应跟随Genlock Master通道变化，但有一定的延迟。延迟大小预定义在寄存器中（*frmdly_stride[28:24]）。</p>
 </li>
-<li>
-<p><strong>写通道(S2MM)</strong>：当配置为Genlock Master时，该通道不会跳过或者重复任一帧数据，并把当前帧的编号输出到s2mm_frame_ptr_out端口。通道不会检测s2mm_frame_ptr_in端口提供的帧编号。Genlock Slave通道应跟随Genlock Master通道变化，但有一定的延迟。延迟大小预定义在寄存器中（*frmdly_stride[28:24]）。</p>
+<li><p><strong>写通道(S2MM)</strong>：当配置为Genlock Master时，该通道不会跳过或者重复任一帧数据，并把当前帧的编号输出到s2mm_frame_ptr_out端口。通道不会检测s2mm_frame_ptr_in端口提供的帧编号。Genlock Slave通道应跟随Genlock Master通道变化，但有一定的延迟。延迟大小预定义在寄存器中（*frmdly_stride[28:24]）。</p>
 </li>
 </ul>
 <div class="checkbox yellow"><input type="radio">
             <p>Genlock Slave</p>
             </div>
 <ul>
-<li>
-<p><strong>读通道（MM2S）</strong>：当配置为Genlock Slave时，该通道会通过跳过或者重复一些帧的方式，尝试与Genlock Master同步。通道会对mm2s_frame_ptr_in端口进行采样，获取Genlock Master的帧编号。为了实现状态反馈，通道会把当前帧的编号输出到mm2s_frame_ptr_out端口。</p>
+<li><p><strong>读通道（MM2S）</strong>：当配置为Genlock Slave时，该通道会通过跳过或者重复一些帧的方式，尝试与Genlock Master同步。通道会对mm2s_frame_ptr_in端口进行采样，获取Genlock Master的帧编号。为了实现状态反馈，通道会把当前帧的编号输出到mm2s_frame_ptr_out端口。</p>
 </li>
-<li>
-<p><strong>写通道（S2MM）</strong>：当配置为Genlock Slave时，该通道会通过跳过或者重复一些帧的方式，尝试与Genlock Master同步。通道会对s2mm_frame_ptr_in端口进行采样，获取Genlock Master的帧编号。为了实现状态反馈，通道会把当前帧的编号输出到s2mm_frame_ptr_out端口。</p>
+<li><p><strong>写通道（S2MM）</strong>：当配置为Genlock Slave时，该通道会通过跳过或者重复一些帧的方式，尝试与Genlock Master同步。通道会对s2mm_frame_ptr_in端口进行采样，获取Genlock Master的帧编号。为了实现状态反馈，通道会把当前帧的编号输出到s2mm_frame_ptr_out端口。</p>
 </li>
 </ul>
 <div class="checkbox yellow"><input type="radio">
@@ -803,9 +787,8 @@ VDMA的锁相同步特性正是用于阻止读、写通道同时操作同一个�
             <p>Dynamic Genlock Slave</p>
             </div>
 <p>Dynamic Genlock Slave通道会操作Dynamic Genlock Master通道上一周期操作的帧。</p>
-<h2 id="1-4-VDMA寄存器简介">1.4 VDMA寄存器简介</h2>
-<p>VDMA为开发者预留了很大的自主配置空间，借此我们可以实现一系列自定义配置，这些配置主要是通过AXI-Lite配置寄存器实现的。<br>
-关于各寄存器的详细介绍可以阅读Xilinx官方的文档，这里仅就其中部分内容做概括性介绍，方便我们快速知道哥哥寄存器的地址和功能。同时要注意这里的地址都是偏移量，实际地址由开发者自己决定的基地址偏移得到。</p>
+<h2 id="1-4-VDMA寄存器简介"><a href="#1-4-VDMA寄存器简介" class="headerlink" title="1.4 VDMA寄存器简介"></a>1.4 VDMA寄存器简介</h2><p>VDMA为开发者预留了很大的自主配置空间，借此我们可以实现一系列自定义配置，这些配置主要是通过AXI-Lite配置寄存器实现的。<br>关于各寄存器的详细介绍可以阅读Xilinx官方的文档，这里仅就其中部分内容做概括性介绍，方便我们快速知道哥哥寄存器的地址和功能。同时要注意这里的地址都是偏移量，实际地址由开发者自己决定的基地址偏移得到。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -902,11 +885,8 @@ VDMA的锁相同步特性正是用于阻止读、写通道同时操作同一个�
 </tr>
 </tbody>
 </table>
-<h1>2.Video Timing Controller(VTC IP)</h1>
-<h2 id="2-1-IP概览">2.1 IP概览</h2>
-<p>这是一个Xilinx官方提供的视频时序生成IP，开发者可以借此快速生成视频时序以进行后续处理，同时该IP内置了<strong>可选的AXI-Lite接口</strong>和<strong>可选的中断控制端口</strong><br>
-，支持AXI-Lite接口协议，即支持ARM对内部寄存器的动态配置。一般是在HDMI显示输出的分辨率，需要动态改变的情况下才使用AXI-Lite接口，所以在较简单的设计中可以不使能。<br>
-该IP相关配置如下图所示，从中可以看出这些信号并不总是有效的，可以根据需要选择或关闭其中部分接口。</p>
+</div>
+<h1 id="2-Video-Timing-Controller-VTC-IP"><a href="#2-Video-Timing-Controller-VTC-IP" class="headerlink" title="2.Video Timing Controller(VTC IP)"></a>2.Video Timing Controller(VTC IP)</h1><h2 id="2-1-IP概览"><a href="#2-1-IP概览" class="headerlink" title="2.1 IP概览"></a>2.1 IP概览</h2><p>这是一个Xilinx官方提供的视频时序生成IP，开发者可以借此快速生成视频时序以进行后续处理，同时该IP内置了<strong>可选的AXI-Lite接口</strong>和<strong>可选的中断控制端口</strong><br>，支持AXI-Lite接口协议，即支持ARM对内部寄存器的动态配置。一般是在HDMI显示输出的分辨率，需要动态改变的情况下才使用AXI-Lite接口，所以在较简单的设计中可以不使能。<br>该IP相关配置如下图所示，从中可以看出这些信号并不总是有效的，可以根据需要选择或关闭其中部分接口。</p>
 <p><img src="/medias/images/VTC.png" alt="VTC IP配置界面"></p>
 <p>其中Generation为时序生成端口，可以将用户配置的时序信号输出用于后续的视频控制，Detection为时序检测端口，可以检测用户生成的时序信号是否合理，两者至少使能一个才能正常生成该IP。而有关视频输出的具体时序要求（即行有效，帧有效，数据使能等）的作用和性质在此不做赘述，默认读者已经具备了这方面的知识。</p>
 <p>该IP可以直接设置常用分辨率（1080P、720P、480P）也可以根据开发需要自定义时序，对应设置在Video Mode处，但当自定义时序时，下列的所有参数需要合理配置。以下做简单介绍。</p>
@@ -914,21 +894,15 @@ VDMA的锁相同步特性正是用于阻止读、写通道同时操作同一个�
 <p><img src="/medias/images/1024_600config.png" alt=""></p>
 <div class="tip cogs"><p>Horizontal Settings</p>
 </div>
-<p>$active\ size = 1024$，直接输入即可<br>
-$Frame\ size = 1344$，直接输入即可<br>
-$Sync\ start = active\ size + Front\ porch = 1024+150 = 1174$<br>
-$Sync\ end = active\ size + Front\ porch + Hsync\ width = 1024+150+10 = 1184$</p>
+<p>$active\ size = 1024$，直接输入即可<br>$Frame\ size = 1344$，直接输入即可<br>$Sync\ start = active\ size + Front\ porch = 1024+150 = 1174$<br>$Sync\ end = active\ size + Front\ porch + Hsync\ width = 1024+150+10 = 1184$</p>
 <div class="tip cogs"><p>Frame/Field 0 Vertical Settings</p>
 </div>
-<p>$active\ size = 600$，直接输入即可<br>
-$Frame\ size = 635$，直接输入即可<br>
-$Sync\ start = active\ size + Front\ porch = 600+7 = 607$<br>
-$Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
+<p>$active\ size = 600$，直接输入即可<br>$Frame\ size = 635$，直接输入即可<br>$Sync\ start = active\ size + Front\ porch = 600+7 = 607$<br>$Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 <p>其余属于微调设置，一般用不到，可以保持默认或者置零。</p>
-<h2 id="2-2-端口介绍">2.2 端口介绍</h2>
-<p>下面就该IP的输入输出端口进行简单介绍：</p>
+<h2 id="2-2-端口介绍"><a href="#2-2-端口介绍" class="headerlink" title="2.2 端口介绍"></a>2.2 端口介绍</h2><p>下面就该IP的输入输出端口进行简单介绍：</p>
 <div class="tip key"><p>通用接口</p>
 </div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -983,8 +957,10 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="tip key"><p>时序检测接口（视频时序输入接口）</p>
 </div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1039,8 +1015,10 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="tip key"><p>时序生成接口（视频时序输出接口）</p>
 </div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1095,8 +1073,10 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="tip key"><p>帧同步信号</p>
 </div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1127,8 +1107,9 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 </tr>
 </tbody>
 </table>
-<h2 id="2-3-寄存器配置介绍">2.3 寄存器配置介绍</h2>
-<p>寄存器列表如下，具体的寄存器含义建议直接查阅官方文档PG016.</p>
+</div>
+<h2 id="2-3-寄存器配置介绍"><a href="#2-3-寄存器配置介绍" class="headerlink" title="2.3 寄存器配置介绍"></a>2.3 寄存器配置介绍</h2><p>寄存器列表如下，具体的寄存器含义建议直接查阅官方文档PG016. </p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1431,30 +1412,24 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 </tr>
 </tbody>
 </table>
-<h1>3.AXI4-Stream to Video Out IP</h1>
-<h2 id="3-1-IP概览">3.1 IP概览</h2>
-<p>AXI4-Stream to Video Out（AXIS-Stream到视频输出）是一种IP核，用于将AXI4-Stream格式的视频数据转换为标准的视频输出格式。它主要用于视频处理系统中，能够接收来自不同源（如摄像头或视频处理单元）的数据流，并将其输出为可显示的图像或视频信号。<br>
-该IP的基础配置界面如下图所示：</p>
+</div>
+<h1 id="3-AXI4-Stream-to-Video-Out-IP"><a href="#3-AXI4-Stream-to-Video-Out-IP" class="headerlink" title="3.AXI4-Stream to Video Out IP"></a>3.AXI4-Stream to Video Out IP</h1><h2 id="3-1-IP概览"><a href="#3-1-IP概览" class="headerlink" title="3.1 IP概览"></a>3.1 IP概览</h2><p>AXI4-Stream to Video Out（AXIS-Stream到视频输出）是一种IP核，用于将AXI4-Stream格式的视频数据转换为标准的视频输出格式。它主要用于视频处理系统中，能够接收来自不同源（如摄像头或视频处理单元）的数据流，并将其输出为可显示的图像或视频信号。<br>该IP的基础配置界面如下图所示：</p>
 <p><img src="/medias/images/AVO.png" alt="IP配置界面"></p>
 <p>其中我们可以配置输入输出信号的位宽与中间缓存区FIFO的深度。</p>
 <p>Clock Mode用于时钟域划分，Common时AXI与VGA共用同一个时钟，Independent则分两个时钟。Timing Mode可将其配置为主机/从机模式。Hysteresis Level则可以设置滞后级别。</p>
 <p>在配置时需要注意以下关键点：</p>
 <ul>
-<li>
-<p>输出的视频（或者说是图像）的速率是由视频相关的标准规定的，比如你 RGB888 1080p 60Hz 的分辨率，其实是可以计算出你需要的带宽的，所以在输出端的带宽是可以计算出来的，并且一定是遵循了视频标准的；</p>
+<li><p>输出的视频（或者说是图像）的速率是由视频相关的标准规定的，比如你 RGB888 1080p 60Hz 的分辨率，其实是可以计算出你需要的带宽的，所以在输出端的带宽是可以计算出来的，并且一定是遵循了视频标准的；</p>
 </li>
-<li>
-<p>输入的 AXI4-Stream 数据速率没必要和输出的视频速率匹配（因为是可以支持到异步 FIFO），但是为了视频输出正常，最好是输入速率不能够太低，否则无法满足正常的视频帧的输出；</p>
+<li><p>输入的 AXI4-Stream 数据速率没必要和输出的视频速率匹配（因为是可以支持到异步 FIFO），但是为了视频输出正常，最好是输入速率不能够太低，否则无法满足正常的视频帧的输出；</p>
 </li>
-<li>
-<p>输入的 AXI4-Stream 速率可以比像素时钟稍微小一些，因为随着像素时钟输出的视频数据，存在消隐区，也就是说，随着像素时钟输出的并不是 100% 的显示数据，但是随着 AXI4-Stream 输入的数据，是 100% 的有效显示数据；</p>
+<li><p>输入的 AXI4-Stream 速率可以比像素时钟稍微小一些，因为随着像素时钟输出的视频数据，存在消隐区，也就是说，随着像素时钟输出的并不是 100% 的显示数据，但是随着 AXI4-Stream 输入的数据，是 100% 的有效显示数据；</p>
 </li>
-<li>
-<p>为了满足正常显示并合理的数据率（比如 1080p 60Hz），输出端速度已定，输入端需要足够的带宽，所以 AXI4-Stream 的数据率不能够太低；</p>
+<li><p>为了满足正常显示并合理的数据率（比如 1080p 60Hz），输出端速度已定，输入端需要足够的带宽，所以 AXI4-Stream 的数据率不能够太低；</p>
 </li>
 </ul>
-<h2 id="3-2-端口介绍">3.2 端口介绍</h2>
-<p>该IP的接口概述如下表所示，更详细的说明详见Xilinx官方文档。</p>
+<h2 id="3-2-端口介绍"><a href="#3-2-端口介绍" class="headerlink" title="3.2 端口介绍"></a>3.2 端口介绍</h2><p>该IP的接口概述如下表所示，更详细的说明详见Xilinx官方文档。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -1563,6 +1538,7 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 </tr>
 </tbody>
 </table>
+</div>
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[1]"></span><a class="reference-anchor" href="#referto_[1]">[1]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/weiaipan1314/article/details/103587791">VDMA IP</a></div>
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[2]"></span><a class="reference-anchor" href="#referto_[2]">[2]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/prask/article/details/142266353">AXI VDMA（AXI Video Direct Memory Access）解析（懒人版）</a></div>
 <div class="reference-source"><span class="hidden-anchor" id="referfrom_[3]"></span><a class="reference-anchor" href="#referto_[3]">[3]<div class="reference-anchor-up fa-solid fa-angles-up"></div></a><a class="reference-link" target="_blank" rel="noopener" href="https://blog.csdn.net/slyywd/article/details/140419162">Xilinx Video IP（三）Video Timing Controller</a></div>
@@ -2118,7 +2094,7 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2024-2025</span>
+                <span id="year">2024-2026</span>
             
             <a href="/about" target="_blank">Badchen666</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -2127,7 +2103,7 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">14.7k</span>
+                        class="white-color">38k</span>
             
             
             
@@ -2232,10 +2208,6 @@ $Sync\ end = active\ size + Front\ porch + Hsync\ width = 600+7+5= 612$</p>
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -2467,7 +2439,7 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<!-- hexo injector body_end start --><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+<!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
 for(var i = 0;i<arr.length;i++){
     arr[i].classList.add('wow');
     arr[i].classList.add('animate__zoomIn');
@@ -2483,6 +2455,6 @@ for(var i = 0;i<arr.length;i++){
     arr[i].setAttribute('data-wow-delay', '');
     arr[i].setAttribute('data-wow-offset', '');
     arr[i].setAttribute('data-wow-iteration', '');
-  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --></body>
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body>
 
 </html>

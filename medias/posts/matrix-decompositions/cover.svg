@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">矩阵分解：从 LU 到 SVD</title><desc id="desc">输入网格经分解因子变为输出椭圆，表示将复杂变换拆成容易理解的步骤。</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101f3d"/><stop offset="1" stop-color="#17484f"/></linearGradient><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#a5e7df" stroke-opacity=".1"/></pattern></defs>
+<rect width="1600" height="900" fill="url(#bg)"/><rect width="1600" height="900" fill="url(#grid)"/>
+<g font-family="'Microsoft YaHei','Noto Sans SC',sans-serif"><rect x="120" y="110" width="245" height="44" rx="22" fill="#70e2cf" fill-opacity=".12"/><text x="145" y="140" fill="#93e7da" font-size="23" letter-spacing="3">LINEAR ALGEBRA</text>
+<text x="120" y="255" fill="#fff" font-size="78" font-weight="700">矩阵分解学习笔记</text><text x="124" y="322" fill="#b5d2dd" font-size="32">从 LU 到 SVD · 九种分解，一条理解主线</text>
+<g transform="translate(270 565)" stroke="#80e4d1" stroke-width="2" fill="none"><path d="M-130-130H130V130H-130Z"/><path d="M-65-130V130M0-130V130M65-130V130M-130-65H130M-130 0H130M-130 65H130"/><circle r="115" stroke-width="4"/></g>
+<path d="M475 565H590M565 550L590 565L565 580" stroke="#a7c6d2" stroke-width="3" fill="none"/>
+<g transform="translate(670 485)"><rect width="320" height="160" rx="24" fill="#fff" fill-opacity=".06" stroke="#8fced4" stroke-opacity=".4"/><text x="160" y="68" text-anchor="middle" fill="#fff" font-size="43" font-family="Georgia,serif">A = U Σ Vᴴ</text><text x="160" y="118" text-anchor="middle" fill="#b5d2dd" font-size="22">换基 · 缩放 · 换基</text></g>
+<path d="M1060 565H1175M1150 550L1175 565L1150 580" stroke="#a7c6d2" stroke-width="3" fill="none"/>
+<g transform="translate(1330 565) rotate(-25)" fill="none" stroke="#99dddf"><ellipse rx="145" ry="82" stroke-width="4"/><path d="M-170 0H170M0-110V110" stroke-width="2" stroke-opacity=".6"/><ellipse rx="95" ry="54" stroke-width="1.5" stroke-opacity=".5"/></g>
+<text x="270" y="765" text-anchor="middle" fill="#b5d2dd" font-size="23">输入空间</text><text x="830" y="765" text-anchor="middle" fill="#b5d2dd" font-size="23">拆开复杂变换</text><text x="1330" y="765" text-anchor="middle" fill="#b5d2dd" font-size="23">输出空间</text></g></svg>
